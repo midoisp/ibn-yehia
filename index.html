@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>مطعم ابن يحيى | فول وفلافل - المنيو التفاعلي الرسمي (٢٤ ساعة)</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#18110C',
+              card: '#241911',
+              surface: '#312218',
+              orange: '#E86C17',
+              amber: '#F59E0B',
+              gold: '#FBBF24',
+              cream: '#FDF8F0',
+              ribbon: '#FFFDF9',
+              green: '#16A34A',
+              red: '#DC2626'
+            }
+          },
+          boxShadow: {
+            'glow': '0 0 28px rgba(232, 108, 23, 0.4)',
+            'card': '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      scroll-behavior: smooth;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .arabesque-bg {
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(232, 108, 23, 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 45%),
+        repeating-linear-gradient(45deg, rgba(232, 108, 23, 0.025) 0px, rgba(232, 108, 23, 0.025) 2px, transparent 2px, transparent 14px);
+    }
+
+    .menu-ribbon {
+      position: relative;
+      background: linear-gradient(90deg, #FFF8EB 0%, #FFFFFF 50%, #FFF8EB 100%);
+      color: #241911;
+      clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0 50%);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    .logo-float { animation: floatSlow 4s ease-in-out infinite; }
+
+    @keyframes pulseBorder {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(232, 108, 23, 0.65); }
+      50% { box-shadow: 0 0 0 10px rgba(232, 108, 23, 0); }
+    }
+    .pulse-orange { animation: pulseBorder 2s infinite; }
+
+    @media print {
+      body * { visibility: hidden; }
+      #qr-stand-printable, #qr-stand-printable * { visibility: visible; }
+      #qr-stand-printable {
+        position: fixed; left: 0; top: 0; width: 100%; max-width: 100%;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#FDF8F0] dark:bg-brand-dark text-[#241911] dark:text-[#FDF8F0] arabesque-bg min-h-screen pb-32 transition-colors duration-300 selection:bg-brand-orange selection:text-white">
+
+  <!-- ===================================================================== -->
+  <!-- 1. TOP TRIAL COUNTDOWN BAR -->
+  <!-- ===================================================================== -->
+  <div id="trial-banner" class="sticky top-0 z-50 bg-gradient-to-r from-[#20140B] via-[#3A2110] to-[#20140B] text-white border-b border-brand-orange/50 shadow-xl">
+    <div class="max-w-6xl mx-auto px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+      <div class="flex items-center gap-2">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-orange"></span>
+        </span>
+        <span class="font-bold text-brand-gold">نسخة معاينة حية:</span>
+        <span class="font-extrabold text-white">مطعم ابن يحيى (Ben Yehia)</span>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3 mr-auto sm:mr-0">
+        <div class="flex items-center gap-1.5 bg-black/50 px-2.5 py-1 rounded-lg border border-brand-orange/40">
+          <span class="text-gray-300 text-[11px]">متبقي للمعاينة:</span>
+          <span id="trial-countdown" class="font-mono font-black text-brand-gold tracking-wider text-xs sm:text-sm">07:59:59</span>
+        </div>
+        
+        <button onclick="openPaywallModal(true)" class="bg-brand-orange hover:bg-orange-500 text-white font-black px-3 py-1 rounded-lg text-xs transition transform active:scale-95 shadow-md flex items-center gap-1">
+          <span>🔒</span>
+          <span>معاينة شاشة القفل والعرض</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 2. SUB-BAR: 24/7 STATUS, ORIGINAL MENU IMAGES, QR CARD, THEME -->
+  <!-- ===================================================================== -->
+  <div class="max-w-6xl mx-auto px-3 pt-3 flex flex-wrap items-center justify-between gap-2">
+    <div class="flex items-center gap-2 bg-white/95 dark:bg-brand-card/95 backdrop-blur px-3 py-1.5 rounded-full border border-brand-orange/30 shadow-sm">
+      <span class="h-2.5 w-2.5 rounded-full bg-green-500 animate-pulse"></span>
+      <span class="text-xs font-black text-green-700 dark:text-green-400">مفتوح الآن • خدمة ٢٤ ساعة طوال الأسبوع</span>
+    </div>
+
+    <div class="flex items-center gap-1.5 sm:gap-2">
+      <button onclick="openPaperMenuModal()" class="flex items-center gap-1.5 bg-brand-orange/15 hover:bg-brand-orange/25 text-brand-orange dark:text-brand-gold border border-brand-orange/40 px-3 py-1.5 rounded-full text-xs font-extrabold transition">
+        <span>📜</span>
+        <span>المنيو الورقي الأصلي (٣ صور)</span>
+      </button>
+
+      <button onclick="openGalleryModal()" class="flex items-center gap-1.5 bg-white dark:bg-brand-card hover:border-brand-orange border border-brand-orange/25 px-3 py-1.5 rounded-full text-xs font-bold transition shadow-sm">
+        <span>📸</span>
+        <span class="hidden sm:inline">صور المكان والزوار</span>
+      </button>
+
+      <button onclick="openQrStandModal()" class="flex items-center gap-1.5 bg-white dark:bg-brand-card hover:border-brand-orange border border-brand-orange/25 px-3 py-1.5 rounded-full text-xs font-bold transition shadow-sm">
+        <span>🖨️</span>
+        <span class="hidden md:inline">كارت الطاولة QR</span>
+      </button>
+
+      <button onclick="toggleTheme()" class="p-2 rounded-full bg-white dark:bg-brand-card border border-brand-orange/30 text-brand-orange shadow-sm hover:scale-105 transition" title="تغيير المظهر">
+        <span id="theme-icon">☀️</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 3. HERO HEADER WITH ACTUAL STOREFRONT & TEAM PHOTO BACKGROUND -->
+  <!-- ===================================================================== -->
+  <header class="max-w-6xl mx-auto px-3 pt-3 pb-2">
+    <div class="relative rounded-3xl overflow-hidden bg-brand-card border-2 border-brand-orange/50 shadow-card">
+      <!-- Real Storefront & Team Image Background -->
+      <div class="absolute inset-0">
+        <img id="hero-bg-img" src="707338765_1560224036113745_3563887800171160082_n.jpg" alt="فريق عمل وواجهة مطعم ابن يحيى" class="w-full h-full object-cover object-center opacity-35 scale-105 transition-all duration-1000" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#18110C] via-[#18110C]/80 to-[#18110C]/40"></div>
+      </div>
+
+      <div class="relative z-10 px-4 py-6 sm:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-right">
+        <!-- Brand Logo -->
+        <div class="relative group shrink-0">
+          <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-orange via-brand-gold to-brand-orange rounded-full blur opacity-75 group-hover:opacity-100 transition"></div>
+          <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-b from-brand-gold to-brand-orange shadow-2xl logo-float">
+            <img src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="لوجو مطعم ابن يحيى" class="w-full h-full object-cover rounded-full bg-white" />
+          </div>
+          <span class="absolute -bottom-1 right-1 bg-brand-orange text-white text-[11px] font-black px-2.5 py-0.5 rounded-full shadow border border-white/40">
+            24 HOURS
+          </span>
+        </div>
+
+        <!-- Restaurant Identity & Info -->
+        <div class="flex-1 text-white">
+          <div class="inline-flex items-center gap-1.5 bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full mb-2 shadow">
+            <span>⭐</span>
+            <span>الطعم الأصلي اللي تحبه • Ben Yehia</span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-1.5 drop-shadow">
+            مطعم ابن يحيى <span class="text-brand-gold text-xl sm:text-3xl font-extrabold block sm:inline mt-1 sm:mt-0">فول وفلافل</span>
+          </h1>
+          <p class="text-gray-200 text-xs sm:text-sm max-w-2xl leading-relaxed mb-4">
+            أقوى تشكيلة ساندوتشات واختراعات ركن الجديد (أباتشي وطعمورجر) فلافل محشية بسطرمة وجبنة طواجن الفول ووجبات الصالة العائلية والفطير الفلاحي الساخن على مدار ٢٤ ساعة.
+          </p>
+
+          <!-- Quick Action & Delivery Numbers Bar -->
+          <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs">
+            <a href="tel:01212845466" class="flex items-center gap-1.5 bg-brand-orange hover:bg-orange-600 text-white px-3.5 py-2 rounded-xl font-black shadow transition">
+              <span>📞</span>
+              <span>دليفري 1: 01212845466</span>
+            </a>
+            <a href="tel:01029428866" class="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 backdrop-blur text-white px-3.5 py-2 rounded-xl font-black border border-white/25 transition">
+              <span>📲</span>
+              <span>دليفري 2: 01029428866</span>
+            </a>
+            <button onclick="openPaperMenuModal()" class="flex items-center gap-1.5 bg-brand-gold/20 hover:bg-brand-gold/30 text-brand-gold px-3.5 py-2 rounded-xl font-bold border border-brand-gold/40 transition">
+              <span>🔍</span>
+              <span>صورة المنيو الأصلي</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Order Mode Selector Card -->
+        <div class="w-full md:w-auto bg-black/55 backdrop-blur-md p-3.5 rounded-2xl border border-brand-orange/40 shrink-0">
+          <div class="text-[11px] text-brand-gold font-extrabold mb-2 text-center">اختر طريقة الطلب الآن:</div>
+          <div class="grid grid-cols-3 gap-1.5 text-xs font-extrabold">
+            <button onclick="setOrderMode('dinein')" id="mode-btn-dinein" class="mode-btn py-2 px-3 rounded-xl bg-brand-orange text-white shadow flex flex-col items-center gap-0.5 transition">
+              <span class="text-base">🍽️</span>
+              <span>صالة المطعم</span>
+            </button>
+            <button onclick="setOrderMode('takeaway')" id="mode-btn-takeaway" class="mode-btn py-2 px-3 rounded-xl bg-white/10 text-gray-300 hover:bg-white/20 flex flex-col items-center gap-0.5 transition">
+              <span class="text-base">🛍️</span>
+              <span>تيك أواي</span>
+            </button>
+            <button onclick="setOrderMode('delivery')" id="mode-btn-delivery" class="mode-btn py-2 px-3 rounded-xl bg-white/10 text-gray-300 hover:bg-white/20 flex flex-col items-center gap-0.5 transition">
+              <span class="text-base">🛵</span>
+              <span>دليفري ٢٤س</span>
+            </button>
+          </div>
+          <div id="table-selector-bar" class="mt-2.5 flex items-center justify-between gap-2 bg-white/10 px-2.5 py-1.5 rounded-lg text-xs text-white">
+            <span>رقم طاولتك بالصالة:</span>
+            <select id="quick-table-num" onchange="syncTableNumber(this.value)" class="bg-brand-dark text-brand-gold font-black px-2 py-0.5 rounded border border-brand-orange/40 focus:outline-none">
+              <option value="1">طاولة 1</option>
+              <option value="2">طاولة 2</option>
+              <option value="3">طاولة 3</option>
+              <option value="4" selected>طاولة 4</option>
+              <option value="5">طاولة 5</option>
+              <option value="6">طاولة 6</option>
+              <option value="7">طاولة 7</option>
+              <option value="8">طاولة 8</option>
+              <option value="9">طاولة 9</option>
+              <option value="10">طاولة 10</option>
+              <option value="عائلي VIP">ركن العائلات</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- 4. FEATURED POSTERS SLIDER -->
+  <!-- ===================================================================== -->
+  <section class="max-w-6xl mx-auto px-3 py-3">
+    <div class="flex items-center justify-between mb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🔥</span>
+        <h2 class="text-base sm:text-lg font-black text-[#241911] dark:text-white">نجوم واختراعات ابن يحيى (اضغط للطلب المباشر)</h2>
+      </div>
+      <span class="text-xs font-extrabold text-brand-orange">طازة ومقرمشة ٢٤ ساعة</span>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div onclick="openCustomizeModal(205)" class="group cursor-pointer relative rounded-2xl overflow-hidden border-2 border-brand-orange/40 shadow-lg aspect-[4/5] bg-brand-card">
+        <img src="741556225_1373944754674761_1894538959646502705_n.jpg" alt="طعمية بسطرمة" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-3">
+          <span class="bg-brand-orange text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-1">الأكثر مبيعا</span>
+          <h3 class="text-white font-black text-sm">طعمية محشية بسطرمة</h3>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-brand-gold font-black text-xs">14 ج.م (ساندوتش)</span>
+            <span class="bg-white text-brand-dark text-[11px] font-black px-2 py-0.5 rounded-lg">+ اطلب</span>
+          </div>
+        </div>
+      </div>
+
+      <div onclick="openCustomizeModal(308)" class="group cursor-pointer relative rounded-2xl overflow-hidden border-2 border-brand-orange/40 shadow-lg aspect-[4/5] bg-brand-card">
+        <img src="738877843_1028836019636008_9026444059321761422_n.jpg" alt="شكشوكة بالسجق" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-3">
+          <span class="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-1">سجق بلدي طازج</span>
+          <h3 class="text-white font-black text-sm">شكشوكة بيض بالسجق</h3>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-brand-gold font-black text-xs">30 ج.م (طبق صالة)</span>
+            <span class="bg-white text-brand-dark text-[11px] font-black px-2 py-0.5 rounded-lg">+ اطلب</span>
+          </div>
+        </div>
+      </div>
+
+      <div onclick="openCustomizeModal(802)" class="group cursor-pointer relative rounded-2xl overflow-hidden border-2 border-brand-orange/40 shadow-lg aspect-[4/5] bg-brand-card">
+        <img src="742345729_907729382369500_5987087870212143893_n.jpg" alt="بطاطس جمبري" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-3">
+          <span class="bg-brand-gold text-brand-dark text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-1">بطريقة ابن يحيى</span>
+          <h3 class="text-white font-black text-sm">بطاطس جمبري مقرمشة</h3>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-brand-gold font-black text-xs">20 ج.م</span>
+            <span class="bg-white text-brand-dark text-[11px] font-black px-2 py-0.5 rounded-lg">+ اطلب</span>
+          </div>
+        </div>
+      </div>
+
+      <div onclick="openCustomizeModal(1)" class="group cursor-pointer relative rounded-2xl overflow-hidden border-2 border-brand-orange/40 shadow-lg aspect-[4/5] bg-brand-card">
+        <img src="732045901_991772973711400_4277556110004826114_n.jpg" alt="ساندوتش أباتشي" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-3">
+          <span class="bg-brand-orange text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-1">ركن الجديد 🔥</span>
+          <h3 class="text-white font-black text-sm">أباتشي ابن يحيى</h3>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-brand-gold font-black text-xs">22 ج.م</span>
+            <span class="bg-white text-brand-dark text-[11px] font-black px-2 py-0.5 rounded-lg">+ اطلب</span>
+          </div>
+        </div>
+      </div>
+
+      <div onclick="openCustomizeModal(911)" class="group cursor-pointer relative rounded-2xl overflow-hidden border-2 border-brand-orange/40 shadow-lg aspect-[4/5] bg-brand-card col-span-2 sm:col-span-1">
+        <img src="736701109_1034935849006158_2198613648915311498_n.jpg" alt="فول ابن يحيى" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-3">
+          <span class="bg-green-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full w-fit mb-1">خلطة سرية</span>
+          <h3 class="text-white font-black text-sm">طبق فول ابن يحيى المخصوص</h3>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-brand-gold font-black text-xs">25 ج.م</span>
+            <span class="bg-white text-brand-dark text-[11px] font-black px-2 py-0.5 rounded-lg">+ اطلب</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 5. MENU TYPE SWITCHER & STICKY SEARCH + CATEGORIES -->
+  <!-- ===================================================================== -->
+  <nav aria-label="أقسام المنيو" class="sticky top-[43px] z-40 bg-[#FDF8F0]/95 dark:bg-brand-dark/95 backdrop-blur-md border-y border-brand-orange/25 py-2.5 shadow-lg">
+    <div class="max-w-6xl mx-auto px-3 space-y-2.5">
+      
+      <div class="flex flex-col sm:flex-row gap-2 items-center justify-between">
+        <div class="grid grid-cols-3 w-full sm:w-auto bg-white dark:bg-brand-card p-1 rounded-xl border border-brand-orange/30 text-xs font-extrabold">
+          <button onclick="setMenuSectionFilter('all')" id="sec-btn-all" class="sec-filter-btn px-3 py-1.5 rounded-lg bg-brand-orange text-white shadow transition">
+            📋 كل المنيو (115 صنف)
+          </button>
+          <button onclick="setMenuSectionFilter('takeaway')" id="sec-btn-takeaway" class="sec-filter-btn px-3 py-1.5 rounded-lg text-gray-600 dark:text-gray-300 hover:text-brand-orange transition">
+            🥪 ساندوتشات وعلب والجديد
+          </button>
+          <button onclick="setMenuSectionFilter('dinein')" id="sec-btn-dinein" class="sec-filter-btn px-3 py-1.5 rounded-lg text-gray-600 dark:text-gray-300 hover:text-brand-orange transition">
+            🍲 منيو الصالة والوجبات
+          </button>
+        </div>
+
+        <div class="relative w-full sm:w-80">
+          <span class="absolute inset-y-0 right-3 flex items-center text-brand-orange">🔍</span>
+          <input 
+            type="text" 
+            id="search-input" 
+            oninput="handleSearch(this.value)"
+            placeholder="ابحث: أباتشي طعمورجر فطير طاجن بسطرمة..." 
+            class="w-full pr-9 pl-8 py-2 rounded-xl bg-white dark:bg-brand-card border border-brand-orange/35 text-xs sm:text-sm focus:outline-none focus:border-brand-orange font-bold placeholder:text-gray-400"
+          />
+          <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 left-2.5 flex items-center text-gray-400 hover:text-red-500 text-xs font-black">✕</button>
+        </div>
+      </div>
+
+      <div id="categories-container" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================================================================== -->
+  <!-- 6. MAIN MENU ITEMS GRID -->
+  <!-- ===================================================================== -->
+  <main class="max-w-6xl mx-auto px-3 py-5">
+    <div id="menu-sections-wrapper" class="space-y-8">
+      <!-- Dynamic sections injected by JS -->
+    </div>
+
+    <div id="empty-search-state" class="hidden text-center py-14 bg-white dark:bg-brand-card rounded-3xl border border-brand-orange/20 my-4">
+      <div class="text-5xl mb-3">🥙</div>
+      <h3 class="text-lg font-black mb-1">لا يوجد صنف مطابق لبحثك</h3>
+      <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">جرب البحث بكلمة أخرى أو استعرض جميع أقسام منيو ابن يحيى</p>
+      <button onclick="clearSearch()" class="bg-brand-orange text-white font-black px-5 py-2.5 rounded-xl text-xs shadow">عرض كل الأصناف</button>
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- 7. REAL RESTAURANT GALLERY & VISITORS SECTION -->
+  <!-- ===================================================================== -->
+  <section class="max-w-6xl mx-auto px-3 py-6">
+    <div class="bg-white dark:bg-brand-card rounded-3xl p-4 sm:p-6 border border-brand-orange/30 shadow-card">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div>
+          <span class="text-xs font-black text-brand-orange uppercase">Ben Yehia Atmosphere</span>
+          <h2 class="text-xl sm:text-2xl font-black">📸 أجواء مطعم ابن يحيى وصالة العائلات</h2>
+        </div>
+        <button onclick="openPaperMenuModal()" class="bg-brand-orange/15 text-brand-orange dark:text-brand-gold font-black px-3.5 py-2 rounded-xl text-xs border border-brand-orange/30 hover:bg-brand-orange hover:text-white transition">
+          📜 فتح صور المنيو الأصلي (٣ صفحات)
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div onclick="openLightbox('707338765_1560224036113745_3563887800171160082_n.jpg', 'فريق عمل وواجهة مطعم ابن يحيى')" class="cursor-pointer group relative rounded-2xl overflow-hidden h-44 sm:h-52 border border-brand-orange/30">
+          <img src="707338765_1560224036113745_3563887800171160082_n.jpg" alt="فريق مطعم ابن يحيى" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+            <span class="text-white text-xs font-extrabold">🧡 أسرة وفريق عمل ابن يحيى</span>
+          </div>
+        </div>
+
+        <div onclick="openLightbox('749207829_992080856986691_1301121746694385_n.jpg', 'صالة العائلات المجهزة داخل مطعم ابن يحيى')" class="cursor-pointer group relative rounded-2xl overflow-hidden h-44 sm:h-52 border border-brand-orange/30">
+          <img src="749207829_992080856986691_1301121746694385_n.jpg" alt="صالة العائلات ابن يحيى" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+            <span class="text-white text-xs font-extrabold">👨👩👧👦 صالة العائلات المكيفة</span>
+          </div>
+        </div>
+
+        <div onclick="openLightbox('748963388_874740051948928_7058704949866629732_n.jpg', 'واجهة الصالة والجلسات الخارجية Ben Yehia')" class="cursor-pointer group relative rounded-2xl overflow-hidden h-44 sm:h-52 border border-brand-orange/30">
+          <img src="748963388_874740051948928_7058704949866629732_n.jpg" alt="واجهة Ben Yehia" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+            <span class="text-white text-xs font-extrabold">✨ جلسات Ben Yehia المميزة</span>
+          </div>
+        </div>
+
+        <div onclick="openLightbox('651348160_1492390719563744_7191028929325187550_n.jpg', 'سفرة ابن يحيى الحرشة مع الطعمية المحشية والسلطات')" class="cursor-pointer group relative rounded-2xl overflow-hidden h-44 sm:h-52 border border-brand-orange/30">
+          <img src="651348160_1492390719563744_7191028929325187550_n.jpg" alt="سفرة ابن يحيى" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+            <span class="text-white text-xs font-extrabold">🍽️ سفرة اللمة والفلافل المحشية</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 8. FOOTER -->
+  <!-- ===================================================================== -->
+  <footer class="max-w-6xl mx-auto px-3 pt-4 pb-10 border-t border-brand-orange/25 text-center text-xs text-gray-600 dark:text-gray-400">
+    <div class="flex flex-col items-center gap-2">
+      <img src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="ابن يحيى" class="w-16 h-16 rounded-full border-2 border-brand-orange shadow-md" />
+      <p class="font-black text-base text-[#241911] dark:text-white">مطعم ابن يحيى - فول وفلافل (الطعم الأصلي اللي تحبه)</p>
+      <p class="font-bold text-brand-orange">خدمة التوصيل ٢٤ ساعة: 01212845466 - 01029428866</p>
+      <p class="text-[11px] opacity-80 mt-1">تم التطوير والتصميم التفاعلي بواسطة <span class="text-brand-orange font-extrabold">Scenario Tech (سيناريو تك)</span> • 01005025722</p>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- 9. FLOATING BOTTOM CART BAR -->
+  <!-- ===================================================================== -->
+  <div class="fixed bottom-3 inset-x-0 z-40 px-3 pointer-events-none">
+    <div class="max-w-3xl mx-auto pointer-events-auto">
+      <div onclick="openCartModal()" role="button" aria-label="عرض سلة طلباتي" class="cursor-pointer bg-gradient-to-r from-[#241409] via-[#381F0E] to-[#241409] hover:from-[#2E1A0C] text-white p-3 sm:px-5 rounded-2xl border-2 border-brand-orange shadow-glow flex items-center justify-between gap-3 transition transform active:scale-98 pulse-orange">
+        <div class="flex items-center gap-3">
+          <div class="relative bg-brand-orange text-white w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg shadow">
+            <span id="cart-count-badge">0</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-black text-sm sm:text-base">📋 طلباتي المختارة</span>
+              <span id="cart-mode-badge" class="text-[10px] bg-white/15 px-2 py-0.5 rounded-full text-brand-gold font-extrabold">داخل الصالة</span>
+            </div>
+            <p class="text-[11px] text-gray-300">اضغط لمراجعة الطلب أو إرساله للكابتن / واتساب الدليفري</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <div class="text-left">
+            <span class="block text-[10px] text-gray-300">الإجمالي</span>
+            <strong id="cart-total-badge" class="text-base sm:text-xl font-black text-brand-gold">0 ج.م</strong>
+          </div>
+          <span class="bg-brand-orange text-white w-8 h-8 rounded-lg flex items-center justify-center font-black">←</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 10. ITEM CUSTOMIZATION MODAL -->
+  <!-- ===================================================================== -->
+  <div id="customize-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-[#FDF8F0] dark:bg-brand-card w-full max-w-lg rounded-t-3xl sm:rounded-3xl border-t-2 sm:border-2 border-brand-orange/50 overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
+      <div class="relative h-48 bg-brand-dark shrink-0">
+        <img id="cust-item-img" src="" alt="" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+        <button onclick="closeCustomizeModal()" class="absolute top-3 left-3 bg-black/60 hover:bg-black text-white w-9 h-9 rounded-full flex items-center justify-center font-black text-lg border border-white/20">✕</button>
+        <span id="cust-item-cat" class="absolute top-3 right-3 bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full shadow"></span>
+        <div class="absolute bottom-3 inset-x-4 flex items-end justify-between text-white">
+          <div>
+            <h3 id="cust-item-name" class="text-xl font-black"></h3>
+            <p id="cust-item-desc" class="text-xs text-gray-300 line-clamp-1"></p>
+          </div>
+          <span id="cust-item-baseprice" class="text-lg font-black text-brand-gold shrink-0"></span>
+        </div>
+      </div>
+
+      <div class="p-4 space-y-4 overflow-y-auto flex-1 text-xs sm:text-sm">
+        <div id="bread-option-group">
+          <label class="block font-black mb-2 text-brand-orange">🥖 اختر نوع العيش المفضل:</label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="cursor-pointer">
+              <input type="radio" name="cust-bread" value="عيش بلدي" checked class="peer hidden" onchange="updateCustomizePrice()" />
+              <div class="p-2.5 rounded-xl border border-brand-orange/30 text-center font-bold peer-checked:bg-brand-orange peer-checked:text-white transition">عيش بلدي</div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="cust-bread" value="عيش شامي" class="peer hidden" onchange="updateCustomizePrice()" />
+              <div class="p-2.5 rounded-xl border border-brand-orange/30 text-center font-bold peer-checked:bg-brand-orange peer-checked:text-white transition">عيش شامي</div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="cust-bread" value="عيش فينو / فرنساوي" class="peer hidden" onchange="updateCustomizePrice()" />
+              <div class="p-2.5 rounded-xl border border-brand-orange/30 text-center font-bold peer-checked:bg-brand-orange peer-checked:text-white transition">فينو / فرنساوي</div>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-black mb-2 text-brand-orange">🌶️ مستوى الشطة والتحبيشة:</label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="cursor-pointer">
+              <input type="radio" name="cust-spice" value="بدون شطة" class="peer hidden" />
+              <div class="p-2 rounded-xl border border-brand-orange/30 text-center font-bold peer-checked:bg-green-600 peer-checked:text-white transition">بدون شطة</div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="cust-spice" value="مظبوط" checked class="peer hidden" />
+              <div class="p-2 rounded-xl border border-brand-orange/30 text-center font-bold peer-checked:bg-brand-orange peer-checked:text-white transition">حرش مظبوط</div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="cust-spice" value="سبايسي نار 🔥" class="peer hidden" />
+              <div class="p-2 rounded-xl border border-brand-orange/30 text-center font-bold peer-checked:bg-red-600 peer-checked:text-white transition">سبايسي نار 🔥</div>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-black mb-2 text-brand-orange">🧀 إضافات خاصة على الصنف:</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center justify-between p-2.5 rounded-xl border border-brand-orange/25 cursor-pointer hover:bg-brand-orange/10">
+              <div class="flex items-center gap-2">
+                <input type="checkbox" class="cust-addon accent-brand-orange w-4 h-4" data-name="صوص شيدر" data-price="5" onchange="updateCustomizePrice()" />
+                <span class="font-bold">صوص شيدر</span>
+              </div>
+              <span class="text-brand-orange font-black">+5 ج</span>
+            </label>
+            <label class="flex items-center justify-between p-2.5 rounded-xl border border-brand-orange/25 cursor-pointer hover:bg-brand-orange/10">
+              <div class="flex items-center gap-2">
+                <input type="checkbox" class="cust-addon accent-brand-orange w-4 h-4" data-name="صوص باربكيو" data-price="5" onchange="updateCustomizePrice()" />
+                <span class="font-bold">صوص باربكيو</span>
+              </div>
+              <span class="text-brand-orange font-black">+5 ج</span>
+            </label>
+            <label class="flex items-center justify-between p-2.5 rounded-xl border border-brand-orange/25 cursor-pointer hover:bg-brand-orange/10">
+              <div class="flex items-center gap-2">
+                <input type="checkbox" class="cust-addon accent-brand-orange w-4 h-4" data-name="إضافة بسطرمة" data-price="7" onchange="updateCustomizePrice()" />
+                <span class="font-bold">إضافة بسطرمة</span>
+              </div>
+              <span class="text-brand-orange font-black">+7 ج</span>
+            </label>
+            <label class="flex items-center justify-between p-2.5 rounded-xl border border-brand-orange/25 cursor-pointer hover:bg-brand-orange/10">
+              <div class="flex items-center gap-2">
+                <input type="checkbox" class="cust-addon accent-brand-orange w-4 h-4" data-name="سمنة بلدي" data-price="6" onchange="updateCustomizePrice()" />
+                <span class="font-bold">سمنة بلدي</span>
+              </div>
+              <span class="text-brand-orange font-black">+6 ج</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <input type="text" id="cust-notes" placeholder="ملاحظة خاصة (مثال: طحينة زيادة بدون بصل عيش مقمر...)" class="w-full p-2.5 rounded-xl bg-white dark:bg-brand-dark border border-brand-orange/30 text-xs font-bold focus:outline-none focus:border-brand-orange" />
+        </div>
+      </div>
+
+      <div class="p-4 bg-white dark:bg-brand-surface border-t border-brand-orange/30 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2 bg-gray-100 dark:bg-brand-dark px-2.5 py-1.5 rounded-xl border border-brand-orange/30">
+          <button onclick="changeCustQty(-1)" class="w-7 h-7 rounded-lg bg-brand-orange text-white font-black">-</button>
+          <span id="cust-qty" class="w-6 text-center font-black text-base">1</span>
+          <button onclick="changeCustQty(1)" class="w-7 h-7 rounded-lg bg-brand-orange text-white font-black">+</button>
+        </div>
+
+        <button onclick="confirmAddCustomizedItem()" class="flex-1 bg-brand-orange hover:bg-orange-600 text-white font-black py-3 px-4 rounded-xl shadow-lg flex items-center justify-between transition">
+          <span>إضافة إلى طلباتي</span>
+          <span id="cust-total-btn-price" class="bg-black/25 px-2.5 py-0.5 rounded-lg text-brand-gold">0 ج.م</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 11. CART & ORDER CHECKOUT MODAL -->
+  <!-- ===================================================================== -->
+  <div id="cart-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-[#FDF8F0] dark:bg-brand-card w-full max-w-xl rounded-t-3xl sm:rounded-3xl border-t-2 sm:border-2 border-brand-orange overflow-hidden shadow-2xl max-h-[92vh] flex flex-col">
+      <div class="p-4 bg-gradient-to-r from-[#241409] to-[#381F0E] text-white flex items-center justify-between border-b border-brand-orange/40">
+        <div class="flex items-center gap-2.5">
+          <img src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="ابن يحيى" class="w-10 h-10 rounded-full border border-brand-gold" />
+          <div>
+            <h3 class="font-black text-base sm:text-lg">قائمة طلباتي - مطعم ابن يحيى</h3>
+            <p class="text-[11px] text-brand-gold">مراجعة الأصناف وإرسال الطلب فورا</p>
+          </div>
+        </div>
+        <button onclick="closeCartModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center font-black">✕</button>
+      </div>
+
+      <div class="p-4 overflow-y-auto flex-1 space-y-4">
+        <div id="cart-items-list" class="space-y-2.5"></div>
+
+        <div class="bg-white dark:bg-brand-dark p-3.5 rounded-2xl border border-brand-orange/30 space-y-3 text-xs">
+          <div class="font-black text-brand-orange text-sm">طريقة استلام الطلب:</div>
+          <div class="grid grid-cols-3 gap-2 font-extrabold">
+            <button onclick="setOrderMode('dinein')" id="cart-mode-dinein" class="py-2 rounded-xl border border-brand-orange/30">🍽️ داخل الصالة</button>
+            <button onclick="setOrderMode('takeaway')" id="cart-mode-takeaway" class="py-2 rounded-xl border border-brand-orange/30">🛍️ تيك أواي</button>
+            <button onclick="setOrderMode('delivery')" id="cart-mode-delivery" class="py-2 rounded-xl border border-brand-orange/30">🛵 توصيل دليفري</button>
+          </div>
+
+          <div id="fields-dinein" class="space-y-2 pt-1">
+            <label class="block font-bold">رقم الطاولة داخل صالة ابن يحيى:</label>
+            <input type="text" id="order-table-input" value="طاولة 4" class="w-full p-2.5 rounded-xl bg-gray-50 dark:bg-brand-card border border-brand-orange/30 font-black" />
+          </div>
+
+          <div id="fields-takeaway" class="hidden space-y-2 pt-1">
+            <input type="text" id="takeaway-name" placeholder="الاسم الكريم" class="w-full p-2.5 rounded-xl bg-gray-50 dark:bg-brand-card border border-brand-orange/30 font-bold" />
+            <input type="tel" id="takeaway-phone" placeholder="رقم الموبايل للتأكيد" class="w-full p-2.5 rounded-xl bg-gray-50 dark:bg-brand-card border border-brand-orange/30 font-bold" />
+          </div>
+
+          <div id="fields-delivery" class="hidden space-y-2 pt-1">
+            <input type="text" id="delivery-name" placeholder="الاسم الكريم" class="w-full p-2.5 rounded-xl bg-gray-50 dark:bg-brand-card border border-brand-orange/30 font-bold" />
+            <input type="tel" id="delivery-phone" placeholder="رقم الموبايل" class="w-full p-2.5 rounded-xl bg-gray-50 dark:bg-brand-card border border-brand-orange/30 font-bold" />
+            <textarea id="delivery-address" rows="2" placeholder="العنوان بالتفصيل (الشارع - بجوار علامة مميزة - الدور)..." class="w-full p-2.5 rounded-xl bg-gray-50 dark:bg-brand-card border border-brand-orange/30 font-bold"></textarea>
+          </div>
+        </div>
+
+        <div class="bg-brand-orange/10 p-3.5 rounded-2xl border border-brand-orange/30 flex items-center justify-between">
+          <span class="font-black text-sm">الإجمالي الكلي للطلب:</span>
+          <strong id="cart-modal-total" class="text-xl font-black text-brand-orange">0 ج.م</strong>
+        </div>
+      </div>
+
+      <div class="p-4 bg-white dark:bg-brand-surface border-t border-brand-orange/30 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <button onclick="openWaiterScreen()" class="bg-brand-dark hover:bg-black text-brand-gold border border-brand-gold/50 font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 text-xs sm:text-sm shadow">
+          <span>👨🍳</span>
+          <span>شاشة الكابتن السريعة (للصالة)</span>
+        </button>
+        <button onclick="sendOrderToRestaurantWhatsApp()" class="bg-green-600 hover:bg-green-700 text-white font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 text-xs sm:text-sm shadow-lg">
+          <span>💬</span>
+          <span>إرسال الطلب لواتساب ابن يحيى</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 12. WAITER FLASHCARD SCREEN -->
+  <!-- ===================================================================== -->
+  <div id="waiter-modal" class="fixed inset-0 z-50 hidden bg-brand-dark text-white flex flex-col justify-between p-5 overflow-y-auto">
+    <div class="flex items-center justify-between border-b border-brand-orange/40 pb-4">
+      <div class="flex items-center gap-3">
+        <img src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="ابن يحيى" class="w-12 h-12 rounded-full border-2 border-brand-gold" />
+        <div>
+          <span class="bg-brand-orange text-white text-xs font-black px-2.5 py-0.5 rounded-full">شاشة الكابتن السريعة</span>
+          <h3 id="waiter-table-title" class="text-2xl font-black text-brand-gold mt-0.5">طاولة رقم 4</h3>
+        </div>
+      </div>
+      <button onclick="closeWaiterScreen()" class="bg-white/10 px-4 py-2 rounded-xl font-black text-sm">رجوع ✕</button>
+    </div>
+
+    <div id="waiter-items-container" class="my-6 space-y-3 flex-1"></div>
+
+    <div class="border-t border-brand-orange/40 pt-4 flex items-center justify-between">
+      <div>
+        <span class="text-xs text-gray-400 block">إجمالي الحساب المطلوب:</span>
+        <strong id="waiter-total-amount" class="text-3xl font-black text-brand-gold">0 ج.م</strong>
+      </div>
+      <button onclick="clearCart(); closeWaiterScreen();" class="bg-red-600/80 hover:bg-red-600 text-white font-bold px-4 py-2.5 rounded-xl text-xs">
+        تفريغ الطلب بعد التسليم
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 13. ORIGINAL PAPER MENU MODAL (3 REAL UPLOADED MENU IMAGES) -->
+  <!-- ===================================================================== -->
+  <div id="paper-menu-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex flex-col p-3 sm:p-6">
+    <div class="max-w-4xl w-full mx-auto flex items-center justify-between text-white mb-3">
+      <div>
+        <h3 class="font-black text-base sm:text-xl text-brand-gold">📜 صور المنيو الورقي الأصلي - مطعم ابن يحيى</h3>
+        <p class="text-xs text-gray-300">تم تفريغ جميع هذه الأصناف والأسعار بالكامل داخل المنيو التفاعلي</p>
+      </div>
+      <button onclick="closePaperMenuModal()" class="bg-white/15 hover:bg-white/25 w-10 h-10 rounded-full font-black text-lg">✕</button>
+    </div>
+
+    <div class="max-w-md mx-auto grid grid-cols-3 gap-2 mb-3 w-full text-xs font-black">
+      <button onclick="switchPaperMenuImg(0)" id="pm-tab-0" class="pm-tab py-2 rounded-xl bg-brand-orange text-white">1. الساندوتشات والعلب</button>
+      <button onclick="switchPaperMenuImg(1)" id="pm-tab-1" class="pm-tab py-2 rounded-xl bg-white/15 text-gray-200">2. ركن الجديد ٢٤س</button>
+      <button onclick="switchPaperMenuImg(2)" id="pm-tab-2" class="pm-tab py-2 rounded-xl bg-white/15 text-gray-200">3. الصالة والوجبات</button>
+    </div>
+
+    <div class="flex-1 overflow-auto flex items-start justify-center">
+      <img id="paper-menu-active-img" src="747839747_1053794104015841_5161540353005909911_n.jpg" alt="منيو ابن يحيى الأصلي" class="max-w-full md:max-w-2xl rounded-2xl border-2 border-brand-orange shadow-2xl" />
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 14. LIGHTBOX & GALLERY MODAL -->
+  <!-- ===================================================================== -->
+  <div id="lightbox-modal" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
+    <img id="lightbox-img" src="" alt="" class="max-h-[80vh] max-w-full rounded-2xl border-2 border-brand-orange shadow-2xl object-contain" />
+    <p id="lightbox-caption" class="text-white font-black text-sm sm:text-base mt-3 bg-black/60 px-4 py-1.5 rounded-full border border-brand-orange/40"></p>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 15. PRINTABLE TABLE QR STAND MODAL -->
+  <!-- ===================================================================== -->
+  <div id="qr-stand-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="max-w-md w-full space-y-3">
+      <div id="qr-stand-printable" class="bg-gradient-to-b from-[#241409] via-[#18110C] to-[#241409] text-white p-6 rounded-3xl border-4 border-brand-orange text-center shadow-2xl relative overflow-hidden">
+        <div class="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-b from-brand-gold to-brand-orange shadow-xl mb-2">
+          <img src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="ابن يحيى" class="w-full h-full rounded-full object-cover bg-white" />
+        </div>
+        <h3 class="text-2xl font-black text-brand-gold">مطعم ابن يحيى</h3>
+        <p class="text-xs font-bold text-gray-300 mb-4">فول وفلافل • الطعم الأصلي اللي تحبه</p>
+
+        <div class="bg-white p-4 rounded-2xl w-48 h-48 mx-auto flex flex-col items-center justify-center shadow-lg border-4 border-brand-gold">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://scenariotech.eg/ibn-yehia-menu" alt="QR Code" class="w-full h-full object-contain" />
+        </div>
+
+        <div class="mt-4 bg-brand-orange/20 border border-brand-orange/50 rounded-xl py-2 px-3">
+          <p class="font-black text-sm text-brand-gold">📱 امسح الكود بكاميرا الموبايل</p>
+          <p class="text-[11px] text-gray-200">وتصفح المنيو الكامل واطلب من طاولتك في ثانية</p>
+        </div>
+
+        <div class="mt-3 pt-3 border-t border-white/15 flex items-center justify-around text-xs font-extrabold text-gray-300">
+          <span>📞 01212845466</span>
+          <span>•</span>
+          <span>📲 01029428866</span>
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="window.print()" class="flex-1 bg-brand-orange text-white font-black py-3 rounded-xl shadow">🖨️ طباعة كارت الطاولة</button>
+        <button onclick="closeQrStandModal()" class="bg-white/15 text-white font-bold px-5 py-3 rounded-xl">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 16. TRIAL EXPIRED / PAYWALL OVERLAY -->
+  <!-- ===================================================================== -->
+  <div id="paywall-overlay" class="fixed inset-0 z-50 hidden bg-[#120B07]/95 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+    <div class="max-w-lg w-full bg-gradient-to-b from-[#241911] to-[#18110C] text-white rounded-3xl border-2 border-brand-orange shadow-glow p-6 sm:p-8 text-center my-auto relative">
+      
+      <button id="close-paywall-preview-btn" onclick="closePaywallModal()" class="absolute top-4 left-4 text-xs bg-white/10 hover:bg-white/20 text-gray-300 px-3 py-1.5 rounded-full font-bold">
+        العودة للمعاينة ✕
+      </button>
+
+      <div class="w-20 h-20 mx-auto rounded-full p-1 bg-gradient-to-r from-brand-orange to-brand-gold shadow-xl mb-3">
+        <img src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="مطعم ابن يحيى" class="w-full h-full rounded-full object-cover" />
+      </div>
+
+      <span class="inline-block bg-red-600/20 text-red-400 border border-red-500/40 text-xs font-black px-3 py-1 rounded-full mb-2">
+        🔒 انتهت فترة المعاينة التجريبية المؤقتة
+      </span>
+
+      <h2 class="text-2xl sm:text-3xl font-black text-white mb-1">تفعيل المنيو التفاعلي الدائم</h2>
+      <h3 class="text-lg font-extrabold text-brand-gold mb-3">مطعم ابن يحيى (Ben Yehia)</h3>
+
+      <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-5">
+        انتهت مدة المعاينة التجريبية المخصصة لهذا المنيو (٨ ساعات).<br/>
+        لتفعيل المنيو بشكل دائم وتشغيله على مدار ٢٤ ساعة لعملاء الصالة والتيك أواي والدليفري مع استاندات الـ QR للطاولات تواصل معنا الآن.
+      </p>
+
+      <div class="bg-black/45 rounded-2xl p-4 border border-brand-orange/50 text-right mb-5">
+        <div class="flex items-center justify-between border-b border-white/10 pb-2.5 mb-3">
+          <span class="bg-brand-orange text-white text-xs font-black px-2.5 py-1 rounded-lg">باقة التفعيل الشاملة مدى الحياة</span>
+          <div class="text-left">
+            <span class="text-2xl font-black text-brand-gold">٢,٥٠٠ ج.م</span>
+            <span class="block text-[10px] text-gray-400">دفعة واحدة فقط • بدون اشتراك شهري</span>
+          </div>
+        </div>
+        <ul class="space-y-2 text-xs sm:text-sm font-bold text-gray-200">
+          <li>✅ منيو تفاعلي شامل الـ 115 صنف وصور المكان والمنتجات يفتح في أقل من ثانية</li>
+          <li>✅ كود QR دائم مدى الحياة لطاولات الصالة + البوسترات + صفحة الفيسبوك</li>
+          <li>✅ استضافة سحابية سريعة 24/7 مجانية بالكامل مدى الحياة</li>
+          <li>✅ تعديل الأسعار وإضافة أصناف وعروض جديدة مجانا في أي وقت</li>
+          <li>✅ إمكانية الربط المباشر مع شبكة الواي فاي وكاميرات المكان</li>
+        </ul>
+      </div>
+
+      <div class="space-y-2.5">
+        <a href="https://wa.me/201005025722?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20Scenario%20Tech%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AA%D9%81%D8%B9%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D9%86%D9%8A%D9%88%20%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B9%D9%84%D9%8A%20%D8%A7%D9%84%D8%AF%D8%A7%D8%A6%D9%85%20%D9%84%D9%85%D8%B7%D8%B9%D9%85%20%D8%A7%D8%A8%D9%86%20%D9%8A%D8%AD%D9%8A%D9%89" target="_blank" class="w-full bg-green-600 hover:bg-green-500 text-white font-black py-3.5 px-5 rounded-xl shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base transition">
+          <span>💬</span>
+          <span>تفعيل المنيو الآن عبر واتساب</span>
+        </a>
+
+        <div class="grid grid-cols-2 gap-2">
+          <a href="tel:01005025722" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5">
+            <span>📞</span>
+            <span>اتصال مباشر: 01005025722</span>
+          </a>
+          <button onclick="resetTrialTimer()" class="bg-brand-orange/20 hover:bg-brand-orange/30 text-brand-gold border border-brand-orange/40 font-bold py-2.5 rounded-xl text-xs">
+            🔄 تمديد المعاينة 8 ساعات
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-5 pt-3 border-t border-white/10 text-[11px] text-gray-400 font-bold">
+        Scenario Tech Digital Solutions • سيناريو تك للحلول الرقمية والأنظمة الذكية
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT ENGINE: ALL 115 REAL ITEMS FROM THE 3 MENUS -->
+  <!-- ===================================================================== -->
+  <script>
+    const IMAGES = {
+      logo: "637885230_1469628955173254_3604443719754401676_n.jpg",
+      feast: "651348160_1492390719563744_7191028929325187550_n.jpg",
+      team: "707338765_1560224036113745_3563887800171160082_n.jpg",
+      apacheSandwich: "732045901_991772973711400_4277556110004826114_n.jpg",
+      stuffedFalafelClose: "734846248_1319001830407221_2236947702109881990_n.jpg",
+      menuNewCorner: "747178236_1596837672058159_2772438170991581543_n.jpg",
+      menuSandwiches: "747839747_1053794104015841_5161540353005909911_n.jpg",
+      menuDineIn: "748194351_2475175976282182_8851630817800304924_n.jpg",
+      exteriorBenYehia: "748963388_874740051948928_7058704949866629732_n.jpg",
+      interiorDining: "749207829_992080856986691_1301121746694385_n.jpg",
+      foulBowl: "736701109_1034935849006158_2198613648915311498_n.jpg",
+      shakshukaPoster: "738877843_1028836019636008_9026444059321761422_n.jpg",
+      greenFalafel: "740070613_2088191515448810_1172339121687689394_n.jpg",
+      pastramiFalafelPoster: "741556225_1373944754674761_1894538959646502705_n.jpg",
+      shrimpFriesPoster: "742345729_907729382369500_5987087870212143893_n.jpg"
+    };
+
+    const CATEGORIES = [
+      { id: 'all', name: 'كل الأقسام', icon: '🍽️', section: 'all' },
+      { id: 'new_corner', name: 'ركن الجديد والاختراعات', icon: '🔥', section: 'takeaway' },
+      { id: 'foul_sand', name: 'ساندوتشات الفول', icon: '🥙', section: 'takeaway' },
+      { id: 'falafel_sand', name: 'ساندوتشات الطعمية', icon: '🟢', section: 'takeaway' },
+      { id: 'eggs_sand', name: 'ساندوتشات البيض', icon: '🍳', section: 'takeaway' },
+      { id: 'fries_sand', name: 'ساندوتشات البطاطس', icon: '🍟', section: 'takeaway' },
+      { id: 'mix_sand', name: 'ساندوتشات متنوع وحلو', icon: '🍯', section: 'takeaway' },
+      { id: 'boxes', name: 'علب الفول والبيض والعدس', icon: '🥡', section: 'takeaway' },
+      { id: 'takeaway_plates', name: 'أطباق التيك أواي', icon: '🍱', section: 'takeaway' },
+      { id: 'meals_dine', name: 'الوجبات المتكاملة والفطير', icon: '👑', section: 'dinein' },
+      { id: 'tajin_dine', name: 'طواجن الفول', icon: '🍲', section: 'dinein' },
+      { id: 'foul_dine', name: 'أطباق الفول (صالة)', icon: '🥣', section: 'dinein' },
+      { id: 'falafel_dine', name: 'أقراص الطعمية (صالة)', icon: '🧆', section: 'dinein' },
+      { id: 'eggs_dine', name: 'أطباق البيض (صالة)', icon: '🍳', section: 'dinein' },
+      { id: 'fries_dine', name: 'أطباق البطاطس (صالة)', icon: '🍟', section: 'dinein' },
+      { id: 'salads_dine', name: 'السلطات والمقبلات', icon: '🥗', section: 'dinein' },
+      { id: 'sweet_drinks', name: 'الحلو والمشروبات الساخنة', icon: '☕', section: 'dinein' }
+    ];
+
+    const MENU_ITEMS = [
+      // 1. ركن الجديد (16 صنف)
+      { id: 1, name: "ساندوتش أباتشي", cat: "new_corner", section: "takeaway", price: 22, badge: "اختراع ابن يحيى 🔥", desc: "ميكس أباتشي المخصوص بصوص الشيدر والبطاطس المقرمشة والخلطة السرية", img: IMAGES.apacheSandwich, hasBread: true },
+      { id: 2, name: "ساندوتش طعمياتو", cat: "new_corner", section: "takeaway", price: 16, badge: "جديد", desc: "طعمية ابن يحيى المقرمشة بخلطة الصوصات الإيطالية المميزة", img: IMAGES.stuffedFalafelClose, hasBread: true },
+      { id: 3, name: "ساندوتش إيطاليانو", cat: "new_corner", section: "takeaway", price: 21, badge: "ركن الجديد", desc: "خلطة إيطاليانو الغنية بالجبن والبطاطس والصوصات", img: IMAGES.apacheSandwich, hasBread: true },
+      { id: 4, name: "ساندوتش بطاطس شيدر", cat: "new_corner", section: "takeaway", price: 17, desc: "بطاطس ذهبية مقرمشة غرقانة في صوص الجبنة الشيدر السايحة", img: IMAGES.shrimpFriesPoster, hasBread: true },
+      { id: 5, name: "ساندوتش بطاطس باربكيو", cat: "new_corner", section: "takeaway", price: 17, desc: "بطاطس مقرمشة مع صوص الباربكيو المدخن الأصلي", img: IMAGES.shrimpFriesPoster, hasBread: true },
+      { id: 6, name: "ساندوتش بطاطس شيدر باربكيو", cat: "new_corner", section: "takeaway", price: 19, badge: "ميكس خطير", desc: "ثنائي الشيدر السايح والباربكيو المدخن على بطاطس ابن يحيى", img: IMAGES.shrimpFriesPoster, hasBread: true },
+      { id: 7, name: "ساندوتش جبنة مقلية", cat: "new_corner", section: "takeaway", price: 16, desc: "أصابع الجبنة المقلية الذهبية المقرمشة من بره والسايحة من جوه", img: IMAGES.apacheSandwich, hasBread: true },
+      { id: 8, name: "ساندوتش جبنة مقلية صوص شيدر", cat: "new_corner", section: "takeaway", price: 20, badge: "عشاق الجبنة", desc: "جبنة مقلية مقرمشة مع شلال صوص شيدر غني", img: IMAGES.apacheSandwich, hasBread: true },
+      { id: 9, name: "ساندوتش جبنة مقلية باربكيو", cat: "new_corner", section: "takeaway", price: 20, desc: "جبنة مقلية ذهبية مع صوص باربكيو مدخن", img: IMAGES.apacheSandwich, hasBread: true },
+      { id: 10, name: "طعمورجر سادة", cat: "new_corner", section: "takeaway", price: 13, badge: "ابتكار", desc: "برجر الطعمية المقرمش في عيش الكيزر مع الخس والصوصات", img: IMAGES.greenFalafel, hasBread: false },
+      { id: 11, name: "طعمورجر بيض", cat: "new_corner", section: "takeaway", price: 18, desc: "طعمورجر مقرمش مع قرص بيض طازج وصوصات", img: IMAGES.greenFalafel, hasBread: false },
+      { id: 12, name: "طعمورجر جبنة مقلية", cat: "new_corner", section: "takeaway", price: 18, badge: "الأكثر طلبا", desc: "طعمورجر محشي ومغطى بالجبنة المقلية المقرمشة", img: IMAGES.stuffedFalafelClose, hasBread: false },
+      { id: 13, name: "طعمورجر محشي جبنة", cat: "new_corner", section: "takeaway", price: 16, desc: "قرص طعمورجر محشي جبنة سايحة من الداخل", img: IMAGES.stuffedFalafelClose, hasBread: false },
+      { id: 14, name: "طعمورجر طعمية سجق", cat: "new_corner", section: "takeaway", price: 16, desc: "طعمورجر بحشوة السجق البلدي المتبل", img: IMAGES.pastramiFalafelPoster, hasBread: false },
+      { id: 15, name: "طعمورجر طعمية بسطرمة", cat: "new_corner", section: "takeaway", price: 17, badge: "مميز", desc: "طعمورجر محشي بسطرمة بلدي فاخرة", img: IMAGES.pastramiFalafelPoster, hasBread: false },
+      { id: 16, name: "طعمورجر طعمية محشية", cat: "new_corner", section: "takeaway", price: 15, desc: "طعمورجر بالخلطة الحرشة المحشية", img: IMAGES.stuffedFalafelClose, hasBread: false },
+
+      // 2. ساندوتشات الفول (9 أصناف)
+      { id: 101, name: "شقة فول", cat: "foul_sand", section: "takeaway", price: 9, desc: "ساندوتش فول ابن يحيى المدمس بالخلطة والطحينة", img: IMAGES.foulBowl, hasBread: true },
+      { id: 102, name: "ساندوتش فول بالسمنة البلدي", cat: "foul_sand", section: "takeaway", price: 10, badge: "طعم زمان", desc: "فول مدمس بالسمنة البلدي الفلاحي الأصلي", img: IMAGES.foulBowl, hasBread: true },
+      { id: 103, name: "ساندوتش فول زيت زيتون", cat: "foul_sand", section: "takeaway", price: 10, desc: "فول مدمس بزيت الزيتون البكر والليمون", img: IMAGES.foulBowl, hasBread: true },
+      { id: 104, name: "ساندوتش فول زيت حار", cat: "foul_sand", section: "takeaway", price: 10, desc: "فول بالزيت الحار الأصلي والطحينة والكمون", img: IMAGES.foulBowl, hasBread: true },
+      { id: 105, name: "ساندوتش فول اسكندراني", cat: "foul_sand", section: "takeaway", price: 11, badge: "حرش", desc: "فول بالخلطة الإسكندراني والفلفل الأخضر والطماطم", img: IMAGES.foulBowl, hasBread: true },
+      { id: 106, name: "ساندوتش فول بالصلصة", cat: "foul_sand", section: "takeaway", price: 11, desc: "فول بالتسبيكة والصلصة والثوم", img: IMAGES.foulBowl, hasBread: true },
+      { id: 107, name: "ساندوتش فول بالبيض", cat: "foul_sand", section: "takeaway", price: 15, desc: "فول مدمس غني مع البيض الطازج", img: IMAGES.foulBowl, hasBread: true },
+      { id: 108, name: "ساندوتش فول سجق", cat: "foul_sand", section: "takeaway", price: 16, desc: "فول مدمس بقطع السجق البلدي", img: IMAGES.shakshukaPoster, hasBread: true },
+      { id: 109, name: "ساندوتش فول بالبسطرمة", cat: "foul_sand", section: "takeaway", price: 17, badge: "فاخر", desc: "فول بالسمنة البلدي وشرائح البسطرمة", img: IMAGES.foulBowl, hasBread: true },
+
+      // 3. ساندوتشات الطعمية (7 أصناف)
+      { id: 201, name: "شقة طعمية", cat: "falafel_sand", section: "takeaway", price: 9, desc: "طعمية خضراء مقرمشة بالسمسم والكزبرة مع السلطة والطحينة", img: IMAGES.greenFalafel, hasBread: true },
+      { id: 202, name: "ساندوتش طعمية بالبطاطس", cat: "falafel_sand", section: "takeaway", price: 11, desc: "طعمية ساخنة مع أصابع البطاطس المحمرة", img: IMAGES.greenFalafel, hasBread: true },
+      { id: 203, name: "ساندوتش طعمية محشية", cat: "falafel_sand", section: "takeaway", price: 12, badge: "حرش", desc: "طعمية محشية بالخلطة الحرشة والبصل والسماق", img: IMAGES.stuffedFalafelClose, hasBread: true },
+      { id: 204, name: "ساندوتش طعمية بالبيض", cat: "falafel_sand", section: "takeaway", price: 15, desc: "ميكس الطعمية المقرمشة مع البيض", img: IMAGES.greenFalafel, hasBread: true },
+      { id: 205, name: "ساندوتش طعمية محشية بسطرمة", cat: "falafel_sand", section: "takeaway", price: 14, badge: "نجم المنيو ⭐", desc: "طعمية ابن يحيى المحشية بسطرمة بلدي مقرمشة من بره وطرية من جوه", img: IMAGES.pastramiFalafelPoster, hasBread: true },
+      { id: 206, name: "ساندوتش طعمية محشية جبنة", cat: "falafel_sand", section: "takeaway", price: 14, desc: "طعمية محشية جبنة غنية سايحة", img: IMAGES.stuffedFalafelClose, hasBread: true },
+      { id: 207, name: "ساندوتش طعمية محشية سجق", cat: "falafel_sand", section: "takeaway", price: 14, desc: "طعمية محشية بخلطة السجق البلدي", img: IMAGES.pastramiFalafelPoster, hasBread: true },
+
+      // 4. ساندوتشات البيض (8 أصناف)
+      { id: 301, name: "ساندوتش بيض سادة", cat: "eggs_sand", section: "takeaway", price: 11, desc: "بيض مقلي طازج بالتوابل", img: IMAGES.shakshukaPoster, hasBread: true },
+      { id: 302, name: "ساندوتش بيض مسلوق", cat: "eggs_sand", section: "takeaway", price: 11, desc: "بيض مسلوق مقطع مع الملح والكمون والفلفل", img: IMAGES.shakshukaPoster, hasBread: true },
+      { id: 303, name: "ساندوتش بيض بسطرمة", cat: "eggs_sand", section: "takeaway", price: 17, badge: "شعبي أصيل", desc: "بيض مقلي بالسمنة مع شرائح البسطرمة البلدي", img: IMAGES.shakshukaPoster, hasBread: true },
+      { id: 304, name: "ساندوتش بيض سجق", cat: "eggs_sand", section: "takeaway", price: 17, desc: "بيض بالسجق البلدي الطازج في كل لقمة", img: IMAGES.shakshukaPoster, hasBread: true },
+      { id: 305, name: "ساندوتش بيض أسباني", cat: "eggs_sand", section: "takeaway", price: 15, desc: "أومليت أسباني بالخضار والجبنة", img: IMAGES.shakshukaPoster, hasBread: true },
+      { id: 306, name: "ساندوتش شكشوكة", cat: "eggs_sand", section: "takeaway", price: 14, desc: "بيض مطبوخ في تسبيكة الطماطم والفلفل والبصل", img: IMAGES.shakshukaPoster, hasBread: true },
+      { id: 307, name: "ساندوتش بيض أسبانش", cat: "eggs_sand", section: "takeaway", price: 15, desc: "بيض على الطريقة الأسبانية الغنية", img: IMAGES.shakshukaPoster, hasBread: true },
+      { id: 308, name: "ساندوتش أسبانش بسطرمة", cat: "eggs_sand", section: "takeaway", price: 18, badge: "سوبر", desc: "بيض أسبانش بالجبنة والخضار مع البسطرمة البلدي", img: IMAGES.shakshukaPoster, hasBread: true },
+
+      // 5. ساندوتشات البطاطس (6 أصناف)
+      { id: 401, name: "ساندوتش بطاطس محمرة", cat: "fries_sand", section: "takeaway", price: 13, desc: "أصابع بطاطس ذهبية مقرمشة مع الكاتشب والمايونيز أو الطحينة", img: IMAGES.shrimpFriesPoster, hasBread: true },
+      { id: 402, name: "ساندوتش بطاطس شيبسي", cat: "fries_sand", section: "takeaway", price: 13, desc: "شرائح شيبسي مقرمشة طازجة", img: IMAGES.shrimpFriesPoster, hasBread: true },
+      { id: 403, name: "ساندوتش بطاطس بوريه", cat: "fries_sand", section: "takeaway", price: 13, desc: "بطاطس مهروسة بالتوابل والكمون والزبدة", img: IMAGES.shrimpFriesPoster, hasBread: true },
+      { id: 404, name: "ساندوتش بطاطس بانيه", cat: "fries_sand", section: "takeaway", price: 15, badge: "مقرمش", desc: "بطاطس بخلطة البانيه الذهبية المقرمشة", img: IMAGES.shrimpFriesPoster, hasBread: true },
+      { id: 405, name: "ساندوتش بطاطس بالجبنة", cat: "fries_sand", section: "takeaway", price: 15, desc: "بطاطس محمرة ساخنة مع الجبنة", img: IMAGES.shrimpFriesPoster, hasBread: true },
+      { id: 406, name: "ساندوتش بطاطس غنوج", cat: "fries_sand", section: "takeaway", price: 15, desc: "بطاطس محمرة مع سلطة البابا غنوج المشوي", img: IMAGES.shrimpFriesPoster, hasBread: true },
+
+      // 6. ساندوتشات متنوع وحلو (9 أصناف)
+      { id: 501, name: "شقة مسقعة", cat: "mix_sand", section: "takeaway", price: 11, desc: "مسقعة باذنجان وفلفل بالصلصة المسبكة", img: IMAGES.feast, hasBread: true },
+      { id: 502, name: "شقة باذنجان", cat: "mix_sand", section: "takeaway", price: 11, desc: "باذنجان مقلي بالدقة والثوم والليمون", img: IMAGES.feast, hasBread: true },
+      { id: 503, name: "شقة بابا غنوج", cat: "mix_sand", section: "takeaway", price: 11, desc: "بابا غنوج مشوي بالطحينة", img: IMAGES.feast, hasBread: true },
+      { id: 504, name: "شقة جبنة بالطماطم", cat: "mix_sand", section: "takeaway", price: 12, desc: "جبنة بيضاء بالطماطم والخيار والنعناع", img: IMAGES.feast, hasBread: true },
+      { id: 505, name: "شقة عجة", cat: "mix_sand", section: "takeaway", price: 15, desc: "قرص عجة مصري بالبيض والخضرة والتوابل", img: IMAGES.greenFalafel, hasBread: true },
+      { id: 506, name: "ساندوتش حلاوة سادة", cat: "mix_sand", section: "takeaway", price: 13, desc: "حلاوة طحينية فاخرة", img: IMAGES.feast, hasBread: true },
+      { id: 507, name: "ساندوتش حلاوة قشطة", cat: "mix_sand", section: "takeaway", price: 15, badge: "الحلو", desc: "حلاوة طحينية مع طبقة قشطة فلاحي غنية", img: IMAGES.feast, hasBread: true },
+      { id: 508, name: "ساندوتش مربى سادة", cat: "mix_sand", section: "takeaway", price: 13, desc: "مربى فواكه لذيذة", img: IMAGES.feast, hasBread: true },
+      { id: 509, name: "ساندوتش مربى بالقشطة", cat: "mix_sand", section: "takeaway", price: 15, desc: "مربى مع قشطة فلاحي طازجة", img: IMAGES.feast, hasBread: true },
+
+      // 7. العلب التيك أواي (14 صنف)
+      { id: 601, name: "علبة فول سادة", cat: "boxes", section: "takeaway", price: 15, desc: "علبة فول مدمس ساخن بدون إضافات", img: IMAGES.foulBowl, hasBread: false },
+      { id: 602, name: "علبة فول جاهزة", cat: "boxes", section: "takeaway", price: 18, badge: "الأكثر مبيعا", desc: "علبة فول محوجة بالزيت والطحينة والتوابل جاهزة للأكل", img: IMAGES.foulBowl, hasBread: false },
+      { id: 603, name: "علبة فول زيت زيتون", cat: "boxes", section: "takeaway", price: 20, desc: "علبة فول محوجة بزيت الزيتون النقي", img: IMAGES.foulBowl, hasBread: false },
+      { id: 604, name: "علبة فول زيت حار", cat: "boxes", section: "takeaway", price: 20, desc: "علبة فول بالزيت الحار والطحينة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 605, name: "علبة فول بالسمنة البلدي", cat: "boxes", section: "takeaway", price: 22, badge: "سمنة بلدي", desc: "علبة فول مدمس بالسمنة البلدي الفاخرة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 606, name: "علبة فول اسكندراني", cat: "boxes", section: "takeaway", price: 20, desc: "علبة فول بالخلطة الإسكندراني الحرشة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 607, name: "علبة فول صلصة", cat: "boxes", section: "takeaway", price: 20, desc: "علبة فول بالتسبيكة والصلصة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 608, name: "علبة فول بالبيض", cat: "boxes", section: "takeaway", price: 25, desc: "علبة فول غنية بالبيض", img: IMAGES.foulBowl, hasBread: false },
+      { id: 609, name: "علبة فول سجق", cat: "boxes", section: "takeaway", price: 25, desc: "علبة فول بالسجق البلدي", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 610, name: "علبة بيض سادة", cat: "boxes", section: "takeaway", price: 20, desc: "علبة بيض مقلي ساخن", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 611, name: "علبة بيض بسطرمة", cat: "boxes", section: "takeaway", price: 25, desc: "علبة بيض بالبسطرمة البلدي", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 612, name: "علبة بيض شكشوكة", cat: "boxes", section: "takeaway", price: 20, desc: "علبة شكشوكة بيض بالصلصة والخضار", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 613, name: "علبة عدس أصفر", cat: "boxes", section: "takeaway", price: 25, badge: "شتوي أصيل", desc: "علبة شوربة/فتة عدس أصفر بالسمنة والتقلية", img: IMAGES.foulBowl, hasBread: false },
+      { id: 614, name: "علبة بصارة", cat: "boxes", section: "takeaway", price: 13, desc: "علبة بصارة مصرية بالتقلية المحمرة والنعناع", img: IMAGES.foulBowl, hasBread: false },
+
+      // 8. أطباق التيك أواي (9 أصناف)
+      { id: 701, name: "طبق باذنجان", cat: "takeaway_plates", section: "takeaway", price: 15, desc: "طبق باذنجان مقلي ومخلل بالدقة الحارة", img: IMAGES.feast, hasBread: false },
+      { id: 702, name: "طبق بابا غنوج", cat: "takeaway_plates", section: "takeaway", price: 15, desc: "طبق بابا غنوج مشوي بالطحينة", img: IMAGES.feast, hasBread: false },
+      { id: 703, name: "طبق جبنة بالطماطم", cat: "takeaway_plates", section: "takeaway", price: 15, desc: "طبق جبنة بالخلطة والطماطم", img: IMAGES.feast, hasBread: false },
+      { id: 704, name: "طبق مسقعة", cat: "takeaway_plates", section: "takeaway", price: 15, desc: "طبق مسقعة بالصلصة والفلفل", img: IMAGES.feast, hasBread: false },
+      { id: 705, name: "طبق بطاطس محمرة", cat: "takeaway_plates", section: "takeaway", price: 15, desc: "طبق بطاطس أصابع مقرمشة", img: IMAGES.shrimpFriesPoster, hasBread: false },
+      { id: 706, name: "طبق بطاطس شيبسي", cat: "takeaway_plates", section: "takeaway", price: 15, desc: "طبق شيبسي مقرمش طازج", img: IMAGES.shrimpFriesPoster, hasBread: false },
+      { id: 707, name: "طبق بطاطس بوريه", cat: "takeaway_plates", section: "takeaway", price: 15, desc: "طبق بطاطس مهروسة متبلة", img: IMAGES.shrimpFriesPoster, hasBread: false },
+      { id: 708, name: "طبق مخلل مشكل", cat: "takeaway_plates", section: "takeaway", price: 10, desc: "تشكيلة مخللات ابن يحيى الحرشة", img: IMAGES.feast, hasBread: false },
+      { id: 709, name: "طبق سلطة خضراء", cat: "takeaway_plates", section: "takeaway", price: 10, desc: "سلطة خضراء بلدي طازجة", img: IMAGES.feast, hasBread: false },
+
+      // 9. منيو الصالة: الوجبات المتكاملة (7 أصناف)
+      { id: 851, name: "وجبة فطير فلاحي مشلتت", cat: "meals_dine", section: "dinein", price: 65, badge: "وجبة ملكية 👑", desc: "فطيرة فلاحي مورقة بالسمنة + عسل أسود + طحينة + جبنة بطماطم", img: IMAGES.feast, hasBread: false },
+      { id: 852, name: "وجبة فول زيت زيتون", cat: "meals_dine", section: "dinein", price: 45, desc: "طبق فول زيت زيتون + 2 قرص طعمية + 2 سلطة + عيش طازج", img: IMAGES.foulBowl, hasBread: false },
+      { id: 853, name: "وجبة فول زيت حار", cat: "meals_dine", section: "dinein", price: 45, desc: "طبق فول زيت حار + 2 قرص طعمية + 2 سلطة + عيش طازج", img: IMAGES.foulBowl, hasBread: false },
+      { id: 854, name: "وجبة فول بالسمنة البلدي", cat: "meals_dine", section: "dinein", price: 50, badge: "شاملة", desc: "طبق فول بالسمنة البلدي + 2 قرص طعمية + 2 سلطة + عيش طازج", img: IMAGES.foulBowl, hasBread: false },
+      { id: 855, name: "وجبة فول اسكندراني", cat: "meals_dine", section: "dinein", price: 50, desc: "طبق فول اسكندراني + 2 قرص طعمية + 2 سلطة + عيش طازج", img: IMAGES.foulBowl, hasBread: false },
+      { id: 856, name: "وجبة فول بالسجق", cat: "meals_dine", section: "dinein", price: 60, badge: "سوبر", desc: "طبق فول بالسجق البلدي + 2 قرص طعمية + 2 سلطة + عيش طازج", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 857, name: "وجبة فول بالبسطرمة", cat: "meals_dine", section: "dinein", price: 60, desc: "طبق فول بالبسطرمة + 2 قرص طعمية + 2 سلطة + عيش طازج", img: IMAGES.foulBowl, hasBread: false },
+
+      // 10. طواجن الفول في الفرن (5 أصناف)
+      { id: 881, name: "طاجن فول بالكبدة", cat: "tajin_dine", section: "dinein", price: 40, badge: "في الفرن 🔥", desc: "طاجن فول مدمس مخبوز في الفرن مع قطع الكبدة المتبلة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 882, name: "طاجن فول بالسجق", cat: "tajin_dine", section: "dinein", price: 40, badge: "الأكثر طلبا", desc: "طاجن فول بالصلصة والسجق البلدي في الفرن", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 883, name: "طاجن فول باللية الضاني", cat: "tajin_dine", section: "dinein", price: 35, desc: "طاجن فول مطبوخ باللية الضاني البلدي المذابة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 884, name: "طاجن فول بالصلصة", cat: "tajin_dine", section: "dinein", price: 30, desc: "طاجن فول بالتسبيكة والثوم في الفرن", img: IMAGES.foulBowl, hasBread: false },
+      { id: 885, name: "طاجن فول موتزاريلا", cat: "tajin_dine", section: "dinein", price: 35, badge: "وش جبنة سايح", desc: "طاجن فول مغطى بطبقة جبنة موتزاريلا ذائبة في الفرن", img: IMAGES.foulBowl, hasBread: false },
+
+      // 11. أطباق الفول صالة (12 صنف)
+      { id: 901, name: "طبق فول زيت زيتون (صالة)", cat: "foul_dine", section: "dinein", price: 15, desc: "طبق فول مدمس بزيت الزيتون يقدم في الصالة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 902, name: "طبق فول زيت حار (صالة)", cat: "foul_dine", section: "dinein", price: 15, desc: "طبق فول بالزيت الحار والطحينة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 903, name: "طبق فول بالسمنة البلدي (صالة)", cat: "foul_dine", section: "dinein", price: 20, desc: "طبق فول بالسمنة البلدي الأصلي", img: IMAGES.foulBowl, hasBread: false },
+      { id: 904, name: "طبق فول اسكندراني (صالة)", cat: "foul_dine", section: "dinein", price: 17, desc: "طبق فول بالخلطة الإسكندراني", img: IMAGES.foulBowl, hasBread: false },
+      { id: 905, name: "طبق فول اسكندراني حار", cat: "foul_dine", section: "dinein", price: 17, desc: "طبق فول اسكندراني سبايسي بالفلفل الحار", img: IMAGES.foulBowl, hasBread: false },
+      { id: 906, name: "طبق فول بالصلصة (صالة)", cat: "foul_dine", section: "dinein", price: 17, desc: "طبق فول بالصلصة المسبكة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 907, name: "طبق فول باربكيو", cat: "foul_dine", section: "dinein", price: 20, desc: "طبق فول بنكهة الباربكيو المدخن المميزة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 908, name: "طبق فول بالنعناع", cat: "foul_dine", section: "dinein", price: 20, desc: "طبق فول بالزيت والليمون والنعناع الفريش", img: IMAGES.foulBowl, hasBread: false },
+      { id: 909, name: "طبق فول بالليمون المعصفر", cat: "foul_dine", section: "dinein", price: 20, badge: "حرش جدا", desc: "طبق فول بخلطة الليمون المعصفر وحبة البركة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 910, name: "طبق فول بالقشطة الفلاحي", cat: "foul_dine", section: "dinein", price: 20, desc: "طبق فول غني بالقشطة الفلاحي الطازجة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 911, name: "طبق فول بالبسطرمة (صالة)", cat: "foul_dine", section: "dinein", price: 20, desc: "طبق فول بالبسطرمة والسمنة", img: IMAGES.foulBowl, hasBread: false },
+      { id: 912, name: "طبق فول بالبيض (صالة)", cat: "foul_dine", section: "dinein", price: 25, desc: "طبق فول مدمس بالبيض", img: IMAGES.foulBowl, hasBread: false },
+      { id: 913, name: "طبق فول ابن يحيى المخصوص", cat: "foul_dine", section: "dinein", price: 25, badge: "التوقيع الخاص ⭐", desc: "طبق فول بخلطة وتحبيشة ابن يحيى السرية المميزة", img: IMAGES.foulBowl, hasBread: false },
+
+      // 12. أقراص الطعمية صالة (7 أصناف)
+      { id: 931, name: "طعمية سمسم (2 قرص)", cat: "falafel_dine", section: "dinein", price: 10, desc: "2 قرص طعمية مقرمشة مغطاة بالسمسم والكزبرة", img: IMAGES.greenFalafel, hasBread: false },
+      { id: 932, name: "طعمية محشية (2 قرص)", cat: "falafel_dine", section: "dinein", price: 15, desc: "2 قرص طعمية محشية بالخلطة الحرشة", img: IMAGES.stuffedFalafelClose, hasBread: false },
+      { id: 933, name: "طعمية بسطرمة (1 قرص كبير)", cat: "falafel_dine", section: "dinein", price: 13, badge: "نجم الصالة", desc: "قرص طعمية كبير محشي بسطرمة بلدي طازجة", img: IMAGES.pastramiFalafelPoster, hasBread: false },
+      { id: 934, name: "طعمية جبنة (1 قرص كبير)", cat: "falafel_dine", section: "dinein", price: 13, desc: "قرص طعمية محشي جبنة كريمي غنية", img: IMAGES.stuffedFalafelClose, hasBread: false },
+      { id: 935, name: "طعمية مكس (1 قرص كبير)", cat: "falafel_dine", section: "dinein", price: 15, badge: "ميكس الحشوات", desc: "قرص طعمية عملاق بحشوة ميكس الجبنة والبسطرمة والخلطة", img: IMAGES.stuffedFalafelClose, hasBread: false },
+      { id: 936, name: "طعمية نعناع (1 قرص)", cat: "falafel_dine", section: "dinein", price: 13, desc: "قرص طعمية بنكهة النعناع الأخضر المنعش", img: IMAGES.greenFalafel, hasBread: false },
+      { id: 937, name: "طعمية ليمون معصفر (1 قرص)", cat: "falafel_dine", section: "dinein", price: 13, desc: "قرص طعمية محشي بخلطة الليمون المعصفر الحرشة", img: IMAGES.stuffedFalafelClose, hasBread: false },
+
+      // 13. أطباق البيض صالة (11 صنف)
+      { id: 951, name: "طبق بيض سادة (صالة)", cat: "eggs_dine", section: "dinein", price: 20, desc: "طبق بيض مقلي ساخن", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 952, name: "طبق بيض بالبسطرمة (صالة)", cat: "eggs_dine", section: "dinein", price: 27, desc: "طبق بيض مقلي بالسمنة مع البسطرمة البلدي", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 953, name: "طبق بيض أباتشي", cat: "eggs_dine", section: "dinein", price: 30, badge: "اختراع", desc: "طبق بيض بخلطة وصوصات أباتشي الجبارة", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 954, name: "طبق بيض سجق", cat: "eggs_dine", section: "dinein", price: 27, desc: "طبق بيض بالسجق البلدي المتبل", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 955, name: "طبق بيض شكشوكة", cat: "eggs_dine", section: "dinein", price: 20, desc: "طبق شكشوكة بيض بالطماطم والفلفل", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 956, name: "طبق بيض عيون", cat: "eggs_dine", section: "dinein", price: 20, desc: "طبق بيض عيون بالسمنة البلدي", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 957, name: "طبق بيض أسبانش", cat: "eggs_dine", section: "dinein", price: 25, desc: "طبق أومليت أسبانش بالجبنة والخضروات", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 958, name: "طبق بيض أسبانش بسطرمة", cat: "eggs_dine", section: "dinein", price: 30, desc: "طبق أومليت أسبانش غني بالبسطرمة", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 959, name: "طبق بيض شكشوكة بالسجق", cat: "eggs_dine", section: "dinein", price: 30, badge: "بوستر ابن يحيى 🔥", desc: "شكشوكة بيض بالسجق البلدي الطازج وطعمه في كل لقمة", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 960, name: "طبق بيض مسلوق", cat: "eggs_dine", section: "dinein", price: 20, desc: "طبق بيض مسلوق متبل", img: IMAGES.shakshukaPoster, hasBread: false },
+      { id: 961, name: "طبق بيض مدحرج بالسمنة", cat: "eggs_dine", section: "dinein", price: 25, badge: "فلاحي", desc: "بيض مسلوق ومدحرج في السمنة البلدي الساخنة", img: IMAGES.shakshukaPoster, hasBread: false },
+
+      // 14. أطباق البطاطس صالة (5 أصناف)
+      { id: 801, name: "طبق بطاطس سادة (صالة)", cat: "fries_dine", section: "dinein", price: 15, desc: "طبق بطاطس فارم فريتس مقرمشة", img: IMAGES.shrimpFriesPoster, hasBread: false },
+      { id: 802, name: "طبق بطاطس جمبري", cat: "fries_dine", section: "dinein", price: 20, badge: "بطريقة ابن يحيى ⭐", desc: "بطاطس جمبري بخلطة ابن يحيى السرية مقرمشة من بره وطرية من جوه", img: IMAGES.shrimpFriesPoster, hasBread: false },
+      { id: 803, name: "طبق بطاطس شيدر", cat: "fries_dine", section: "dinein", price: 25, desc: "طبق بطاطس مقرمشة مغطى بصوص الجبنة الشيدر", img: IMAGES.shrimpFriesPoster, hasBread: false },
+      { id: 804, name: "طبق بطاطس باربكيو", cat: "fries_dine", section: "dinein", price: 25, desc: "طبق بطاطس مع صوص الباربكيو المدخن", img: IMAGES.shrimpFriesPoster, hasBread: false },
+      { id: 805, name: "طبق بطاطس شيدر باربكيو", cat: "fries_dine", section: "dinein", price: 25, badge: "ميكس الصوصات", desc: "طبق بطاطس غرقان في صوص الشيدر والباربكيو معا", img: IMAGES.shrimpFriesPoster, hasBread: false },
+
+      // 15. السلطات والمقبلات (13 صنف)
+      { id: 971, name: "سلطة طحينة", cat: "salads_dine", section: "dinein", price: 10, desc: "طحينة بلدي خام متبلة بالكمون والليمون", img: IMAGES.feast, hasBread: false },
+      { id: 972, name: "سلطة حمص الشام", cat: "salads_dine", section: "dinein", price: 15, desc: "سلطة حمص بالطحينة وزيت الزيتون", img: IMAGES.feast, hasBread: false },
+      { id: 973, name: "سلطة بابا غنوج", cat: "salads_dine", section: "dinein", price: 10, desc: "باذنجان مشوي بالطحينة والخضرة", img: IMAGES.feast, hasBread: false },
+      { id: 974, name: "جبنة بطماطم", cat: "salads_dine", section: "dinein", price: 10, desc: "جبنة بيضاء بالطماطم والفلفل والزيت", img: IMAGES.feast, hasBread: false },
+      { id: 975, name: "جبنة قريش فلاحي", cat: "salads_dine", section: "dinein", price: 10, desc: "جبنة قريش صحية بزيت الزيتون والكمون", img: IMAGES.feast, hasBread: false },
+      { id: 976, name: "طبق مسقعة مقبلات", cat: "salads_dine", section: "dinein", price: 10, desc: "مسقعة بالخل والثوم والصلصة", img: IMAGES.feast, hasBread: false },
+      { id: 977, name: "باذنجان مقلي بالدقة", cat: "salads_dine", section: "dinein", price: 10, desc: "شرائح باذنجان مقلي بتتبيلة الثوم والفلفل الحار", img: IMAGES.feast, hasBread: false },
+      { id: 978, name: "باذنجان مدحرج", cat: "salads_dine", section: "dinein", price: 10, desc: "باذنجان عروس مخلل بالدقة الحرشة", img: IMAGES.feast, hasBread: false },
+      { id: 979, name: "سلطة خضراء", cat: "salads_dine", section: "dinein", price: 10, desc: "طماطم وخيار وجزر وخضرة طازجة", img: IMAGES.feast, hasBread: false },
+      { id: 980, name: "طبق مخلل", cat: "salads_dine", section: "dinein", price: 10, desc: "مخلل مشكل يفتح الشهية", img: IMAGES.feast, hasBread: false },
+      { id: 981, name: "طماطم متبلة بالدقة", cat: "salads_dine", section: "dinein", price: 10, desc: "شرائح طماطم متبلة بالثوم والكمون والكزبرة", img: IMAGES.feast, hasBread: false },
+      { id: 982, name: "بصل مملح بالخل والليمون", cat: "salads_dine", section: "dinein", price: 10, desc: "حلقات بصل أحمر بالخل والليمون والسماق", img: IMAGES.feast, hasBread: false },
+      { id: 983, name: "ليمون معصفر", cat: "salads_dine", section: "dinein", price: 10, desc: "ليمون معصفر بحبة البركة والعصفر", img: IMAGES.feast, hasBread: false },
+
+      // 16. الحلو والمشروبات (12 صنف)
+      { id: 991, name: "طبق حلاوة بالقشطة", cat: "sweet_drinks", section: "dinein", price: 15, badge: "تحلية", desc: "حلاوة طحينية مغطاة بالقشطة الفلاحي", img: IMAGES.feast, hasBread: false },
+      { id: 992, name: "طبق مربى بالقشطة", cat: "sweet_drinks", section: "dinein", price: 20, desc: "مربى فواكه مع القشطة الفلاحي", img: IMAGES.feast, hasBread: false },
+      { id: 993, name: "طبق عسل أسود بالطحينة", cat: "sweet_drinks", section: "dinein", price: 25, desc: "عسل أسود صعيدي مخفوق بالطحينة الخام", img: IMAGES.feast, hasBread: false },
+      { id: 994, name: "طبق حلاوة سادة", cat: "sweet_drinks", section: "dinein", price: 25, desc: "طبق حلاوة طحينية فاخرة", img: IMAGES.feast, hasBread: false },
+      { id: 995, name: "طبق مربى سادة", cat: "sweet_drinks", section: "dinein", price: 25, desc: "طبق مربى للتحلية", img: IMAGES.feast, hasBread: false },
+      { id: 996, name: "مياه معدنية صغيرة", cat: "sweet_drinks", section: "dinein", price: 12, desc: "زجاجة مياه معدنية باردة", img: IMAGES.interiorDining, hasBread: false },
+      { id: 997, name: "كوب شاي سادة", cat: "sweet_drinks", section: "dinein", price: 15, desc: "شاي كشري أو فتلة مضبوط على المزاج", img: IMAGES.exteriorBenYehia, hasBread: false },
+      { id: 998, name: "كوب شاي بالنعناع الأخضر", cat: "sweet_drinks", section: "dinein", price: 15, badge: "بعد الفطار", desc: "شاي ساخن بأوراق النعناع الفريش", img: IMAGES.exteriorBenYehia, hasBread: false },
+      { id: 999, name: "كوب شاي بالقرنفل", cat: "sweet_drinks", section: "dinein", price: 20, desc: "شاي غني بنكهة القرنفل الأصلي", img: IMAGES.exteriorBenYehia, hasBread: false },
+      { id: 1000, name: "كوب ينسون دافئ", cat: "sweet_drinks", section: "dinein", price: 15, desc: "مشروب ينسون طبيعي مهدئ", img: IMAGES.exteriorBenYehia, hasBread: false },
+      { id: 1001, name: "كوب نسكافيه", cat: "sweet_drinks", section: "dinein", price: 25, desc: "نسكافيه بالحليب غني بالرغوة", img: IMAGES.exteriorBenYehia, hasBread: false },
+      { id: 1002, name: "كوب شاي بحليب", cat: "sweet_drinks", section: "dinein", price: 25, desc: "شاي بالحليب الطازج الساخن", img: IMAGES.exteriorBenYehia, hasBread: false }
+    ];
+
+    let activeSectionFilter = 'all';
+    let activeCategory = 'all';
+    let searchQuery = '';
+    let orderMode = 'dinein';
+    let cart = JSON.parse(localStorage.getItem('ibn_yehia_cart_v2') || '[]');
+    let currentCustomizeItem = null;
+    let currentCustomizeQty = 1;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initTrialTimer();
+      renderCategories();
+      renderMenu();
+      updateCartUI();
+      setOrderMode('dinein');
+    });
+
+    const TRIAL_DURATION_MS = 8 * 60 * 60 * 1000;
+    function initTrialTimer() {
+      let start = localStorage.getItem('ibn_yehia_trial_start');
+      if (!start) {
+        start = Date.now().toString();
+        localStorage.setItem('ibn_yehia_trial_start', start);
+      }
+      const endTime = parseInt(start, 10) + TRIAL_DURATION_MS;
+
+      setInterval(() => {
+        const diff = endTime - Date.now();
+        const el = document.getElementById('trial-countdown');
+        if (diff <= 0) {
+          el.textContent = "00:00:00";
+          openPaywallModal(false);
+        } else {
+          const hrs = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+          const mins = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+          const secs = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+          el.textContent = `${hrs}:${mins}:${secs}`;
+        }
+      }, 1000);
+    }
+
+    function openPaywallModal(isPreview = true) {
+      const modal = document.getElementById('paywall-overlay');
+      const closeBtn = document.getElementById('close-paywall-preview-btn');
+      closeBtn.style.display = isPreview ? 'block' : 'none';
+      modal.classList.remove('hidden');
+    }
+
+    function closePaywallModal() {
+      document.getElementById('paywall-overlay').classList.add('hidden');
+    }
+
+    function resetTrialTimer() {
+      localStorage.setItem('ibn_yehia_trial_start', Date.now().toString());
+      closePaywallModal();
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categories-container');
+      const filteredCats = CATEGORIES.filter(c => 
+        c.id === 'all' || activeSectionFilter === 'all' || c.section === activeSectionFilter
+      );
+
+      container.innerHTML = filteredCats.map(cat => {
+        const isActive = activeCategory === cat.id;
+        return `
+          <button 
+            onclick="selectCategory('${cat.id}')"
+            class="shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-extrabold transition border ${
+              isActive 
+                ? 'bg-brand-orange text-white border-brand-orange shadow-md scale-105' 
+                : 'bg-white dark:bg-brand-card text-[#241911] dark:text-gray-200 border-brand-orange/25 hover:border-brand-orange'
+            }"
+          >
+            <span>${cat.icon}</span>
+            <span>${cat.name}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setMenuSectionFilter(sec) {
+      activeSectionFilter = sec;
+      activeCategory = 'all';
+      document.querySelectorAll('.sec-filter-btn').forEach(btn => {
+        btn.className = 'sec-filter-btn px-3 py-1.5 rounded-lg text-gray-600 dark:text-gray-300 hover:text-brand-orange transition';
+      });
+      document.getElementById(`sec-btn-${sec}`).className = 'sec-filter-btn px-3 py-1.5 rounded-lg bg-brand-orange text-white shadow transition';
+      renderCategories();
+      renderMenu();
+    }
+
+    function selectCategory(catId) {
+      activeCategory = catId;
+      renderCategories();
+      renderMenu();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      document.getElementById('clear-search-btn').classList.toggle('hidden', !searchQuery);
+      renderMenu();
+    }
+
+    function clearSearch() {
+      document.getElementById('search-input').value = '';
+      handleSearch('');
+    }
+
+    function renderMenu() {
+      const wrapper = document.getElementById('menu-sections-wrapper');
+      const emptyState = document.getElementById('empty-search-state');
+
+      const visibleCats = CATEGORIES.filter(c => 
+        c.id !== 'all' &&
+        (activeSectionFilter === 'all' || c.section === activeSectionFilter) &&
+        (activeCategory === 'all' || c.id === activeCategory)
+      );
+
+      let totalMatched = 0;
+      let html = '';
+
+      visibleCats.forEach(cat => {
+        const items = MENU_ITEMS.filter(item => {
+          const matchesCat = item.cat === cat.id;
+          const matchesQuery = !searchQuery || 
+            item.name.toLowerCase().includes(searchQuery) || 
+            item.desc.toLowerCase().includes(searchQuery);
+          return matchesCat && matchesQuery;
+        });
+
+        if (items.length > 0) {
+          totalMatched += items.length;
+          html += `
+            <section id="sec-${cat.id}" class="space-y-3.5">
+              <div class="flex items-center justify-between">
+                <div class="menu-ribbon px-6 py-2 inline-flex items-center gap-2 font-black text-base sm:text-lg">
+                  <span>${cat.icon}</span>
+                  <span>${cat.name}</span>
+                  <span class="text-xs bg-brand-orange text-white px-2 py-0.5 rounded-full">${items.length}</span>
+                </div>
+                <span class="text-[11px] font-bold text-brand-orange hidden sm:inline">
+                  ${cat.section === 'dinein' ? '🍽️ منيو الصالة والوجبات' : '🥪 منيو الساندوتشات والتيك أواي'}
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                ${items.map(item => renderItemCard(item)).join('')}
+              </div>
+            </section>
+          `;
+        }
+      });
+
+      wrapper.innerHTML = html;
+      emptyState.classList.toggle('hidden', totalMatched > 0);
+    }
+
+    function renderItemCard(item) {
+      return `
+        <div onclick="openCustomizeModal(${item.id})" class="group cursor-pointer bg-white dark:bg-brand-card rounded-2xl p-3 border border-brand-orange/25 hover:border-brand-orange shadow-sm hover:shadow-card transition flex items-center gap-3.5 relative overflow-hidden">
+          ${item.badge ? `<span class="absolute top-2 right-2 z-10 bg-brand-orange text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow">${item.badge}</span>` : ''}
+          
+          <div class="w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-brand-dark border border-brand-orange/20">
+            <img src="${item.img}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <h3 class="font-black text-sm sm:text-base text-[#241911] dark:text-white truncate group-hover:text-brand-orange transition">${item.name}</h3>
+            <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-relaxed mt-0.5">${item.desc}</p>
+            
+            <div class="mt-2.5 flex items-center justify-between">
+              <div class="font-black text-brand-orange dark:text-brand-gold text-base">
+                ${item.price} <span class="text-xs font-bold">ج.م</span>
+              </div>
+
+              <button onclick="event.stopPropagation(); quickAddItem(${item.id})" class="bg-brand-orange/15 hover:bg-brand-orange text-brand-orange hover:text-white font-black text-xs px-3 py-1.5 rounded-xl border border-brand-orange/30 transition flex items-center gap-1">
+                <span>+</span>
+                <span>أضف</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function openCustomizeModal(itemId) {
+      const item = MENU_ITEMS.find(i => i.id === itemId);
+      if (!item) return;
+      currentCustomizeItem = item;
+      currentCustomizeQty = 1;
+
+      document.getElementById('cust-item-img').src = item.img;
+      document.getElementById('cust-item-name').textContent = item.name;
+      document.getElementById('cust-item-desc').textContent = item.desc;
+      document.getElementById('cust-item-baseprice').textContent = `${item.price} ج.م`;
+      const catObj = CATEGORIES.find(c => c.id === item.cat);
+      document.getElementById('cust-item-cat').textContent = catObj ? catObj.name : '';
+
+      document.getElementById('bread-option-group').style.display = item.hasBread ? 'block' : 'none';
+      document.getElementById('cust-qty').textContent = '1';
+      document.getElementById('cust-notes').value = '';
+      document.querySelectorAll('.cust-addon').forEach(cb => cb.checked = false);
+
+      updateCustomizePrice();
+      document.getElementById('customize-modal').classList.remove('hidden');
+    }
+
+    function closeCustomizeModal() {
+      document.getElementById('customize-modal').classList.add('hidden');
+    }
+
+    function changeCustQty(delta) {
+      currentCustomizeQty = Math.max(1, currentCustomizeQty + delta);
+      document.getElementById('cust-qty').textContent = currentCustomizeQty;
+      updateCustomizePrice();
+    }
+
+    function updateCustomizePrice() {
+      if (!currentCustomizeItem) return;
+      let addonsTotal = 0;
+      document.querySelectorAll('.cust-addon:checked').forEach(cb => {
+        addonsTotal += parseFloat(cb.dataset.price || 0);
+      });
+      const unitPrice = currentCustomizeItem.price + addonsTotal;
+      const total = unitPrice * currentCustomizeQty;
+      document.getElementById('cust-total-btn-price').textContent = `${total} ج.م`;
+    }
+
+    function confirmAddCustomizedItem() {
+      if (!currentCustomizeItem) return;
+      const bread = currentCustomizeItem.hasBread 
+        ? (document.querySelector('input[name="cust-bread"]:checked')?.value || 'عيش بلدي') 
+        : '';
+      const spice = document.querySelector('input[name="cust-spice"]:checked')?.value || 'مظبوط';
+      
+      let addons = [];
+      let addonsPrice = 0;
+      document.querySelectorAll('.cust-addon:checked').forEach(cb => {
+        addons.push(cb.dataset.name);
+        addonsPrice += parseFloat(cb.dataset.price || 0);
+      });
+
+      const notes = document.getElementById('cust-notes').value.trim();
+      const unitPrice = currentCustomizeItem.price + addonsPrice;
+
+      const detailsParts = [bread, spice, ...addons, notes].filter(Boolean);
+      const customKey = `${currentCustomizeItem.id}-${detailsParts.join('|')}`;
+
+      const existing = cart.find(c => c.customKey === customKey);
+      if (existing) {
+        existing.qty += currentCustomizeQty;
+      } else {
+        cart.push({
+          customKey,
+          id: currentCustomizeItem.id,
+          name: currentCustomizeItem.name,
+          unitPrice,
+          qty: currentCustomizeQty,
+          details: detailsParts.join(' • '),
+          img: currentCustomizeItem.img
+        });
+      }
+
+      saveCart();
+      closeCustomizeModal();
+    }
+
+    function quickAddItem(itemId) {
+      const item = MENU_ITEMS.find(i => i.id === itemId);
+      if (!item) return;
+      const customKey = `${item.id}-default`;
+      const existing = cart.find(c => c.customKey === customKey);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          customKey,
+          id: item.id,
+          name: item.name,
+          unitPrice: item.price,
+          qty: 1,
+          details: item.hasBread ? 'عيش بلدي • حرش مظبوط' : 'تحضير طازج',
+          img: item.img
+        });
+      }
+      saveCart();
+    }
+
+    function saveCart() {
+      localStorage.setItem('ibn_yehia_cart_v2', JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+      const totalPrice = cart.reduce((sum, i) => sum + (i.unitPrice * i.qty), 0);
+
+      document.getElementById('cart-count-badge').textContent = totalQty;
+      document.getElementById('cart-total-badge').textContent = `${totalPrice} ج.م`;
+      document.getElementById('cart-modal-total').textContent = `${totalPrice} ج.م`;
+      document.getElementById('waiter-total-amount').textContent = `${totalPrice} ج.م`;
+
+      const listEl = document.getElementById('cart-items-list');
+      if (cart.length === 0) {
+        listEl.innerHTML = `
+          <div class="text-center py-8 text-gray-400">
+            <div class="text-4xl mb-2">🥙</div>
+            <p class="font-bold text-xs">لمك تختر أي أصناف بعد اضغط على أي صنف لإضافته</p>
+          </div>
+        `;
+      } else {
+        listEl.innerHTML = cart.map((item, idx) => `
+          <div class="flex items-center justify-between gap-2 bg-white dark:bg-brand-dark p-2.5 rounded-xl border border-brand-orange/25">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <img src="${item.img}" class="w-12 h-12 rounded-lg object-cover shrink-0" />
+              <div class="min-w-0">
+                <h4 class="font-black text-xs sm:text-sm truncate">${item.name}</h4>
+                <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">${item.details}</p>
+                <span class="text-xs font-black text-brand-orange">${item.unitPrice * item.qty} ج.م</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="updateCartItemQty(${idx}, -1)" class="w-7 h-7 rounded-lg bg-gray-200 dark:bg-brand-card font-black text-xs">-</button>
+              <span class="w-5 text-center font-black text-xs">${item.qty}</span>
+              <button onclick="updateCartItemQty(${idx}, 1)" class="w-7 h-7 rounded-lg bg-brand-orange text-white font-black text-xs">+</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function updateCartItemQty(idx, delta) {
+      if (!cart[idx]) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      saveCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      saveCart();
+    }
+
+    function openCartModal() {
+      updateCartUI();
+      document.getElementById('cart-modal').classList.remove('hidden');
+    }
+
+    function closeCartModal() {
+      document.getElementById('cart-modal').classList.add('hidden');
+    }
+
+    function setOrderMode(mode) {
+      orderMode = mode;
+      const modeNames = { dinein: 'داخل الصالة', takeaway: 'تيك أواي', delivery: 'دليفري ٢٤س' };
+      document.getElementById('cart-mode-badge').textContent = modeNames[mode];
+
+      ['dinein', 'takeaway', 'delivery'].forEach(m => {
+        const heroBtn = document.getElementById(`mode-btn-${m}`);
+        const cartBtn = document.getElementById(`cart-mode-${m}`);
+        const fields = document.getElementById(`fields-${m}`);
+        if (m === mode) {
+          heroBtn.className = "mode-btn py-2 px-3 rounded-xl bg-brand-orange text-white shadow flex flex-col items-center gap-0.5 transition";
+          cartBtn.className = "py-2 rounded-xl bg-brand-orange text-white font-black shadow";
+          fields.classList.remove('hidden');
+        } else {
+          heroBtn.className = "mode-btn py-2 px-3 rounded-xl bg-white/10 text-gray-300 hover:bg-white/20 flex flex-col items-center gap-0.5 transition";
+          cartBtn.className = "py-2 rounded-xl border border-brand-orange/30 text-gray-500";
+          fields.classList.add('hidden');
+        }
+      });
+
+      document.getElementById('table-selector-bar').style.display = mode === 'dinein' ? 'flex' : 'none';
+    }
+
+    function syncTableNumber(val) {
+      document.getElementById('order-table-input').value = `طاولة ${val}`;
+    }
+
+    function openWaiterScreen() {
+      if (cart.length === 0) {
+        alert('السلة فارغة! أضف أصنافا أولا.');
+        return;
+      }
+      const tableVal = document.getElementById('order-table-input').value || 'طاولة 4';
+      document.getElementById('waiter-table-title').textContent = tableVal;
+      document.getElementById('waiter-items-container').innerHTML = cart.map(item => `
+        <div class="bg-brand-card p-4 rounded-2xl border-2 border-brand-orange/50 flex items-center justify-between">
+          <div>
+            <div class="text-xl font-black text-white">${item.qty} × ${item.name}</div>
+            <div class="text-xs text-brand-gold font-bold mt-1">${item.details}</div>
+          </div>
+          <div class="text-xl font-black text-brand-gold">${item.unitPrice * item.qty} ج.م</div>
+        </div>
+      `).join('');
+      document.getElementById('waiter-modal').classList.remove('hidden');
+    }
+
+    function closeWaiterScreen() {
+      document.getElementById('waiter-modal').classList.add('hidden');
+    }
+
+    function sendOrderToRestaurantWhatsApp() {
+      if (cart.length === 0) {
+        alert('الرجاء اختيار أصناف من المنيو أولا.');
+        return;
+      }
+      const total = cart.reduce((sum, i) => sum + (i.unitPrice * i.qty), 0);
+      let headerInfo = '';
+      if (orderMode === 'dinein') {
+        const tbl = document.getElementById('order-table-input').value || 'طاولة 4';
+        headerInfo = `🍽️ *طلب داخل الصالة (${tbl})*`;
+      } else if (orderMode === 'takeaway') {
+        const name = document.getElementById('takeaway-name').value || 'عميل تيك أواي';
+        const phone = document.getElementById('takeaway-phone').value || '';
+        headerInfo = `🛍️ *طلب تيك أواي*\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}`;
+      } else {
+        const name = document.getElementById('delivery-name').value || 'عميل دليفري';
+        const phone = document.getElementById('delivery-phone').value || '';
+        const addr = document.getElementById('delivery-address').value || 'لم يحدد';
+        headerInfo = `🛵 *طلب توصيل دليفري*\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n📍 العنوان: ${addr}`;
+      }
+
+      const itemsLines = cart.map((item, idx) => 
+        `${idx + 1}. *${item.qty} × ${item.name}* (${item.unitPrice * item.qty} ج.م)\n   _التفاصيل: ${item.details}_`
+      ).join('\n');
+
+      const message = `*مطعم ابن يحيى - فول وفلافل* 🥙\n${headerInfo}\n--------------------------\n${itemsLines}\n--------------------------\n💰 *الإجمالي الكلي: ${total} ج.م*`;
+      const whatsappUrl = `https://wa.me/201212845466?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    }
+
+    const PAPER_MENU_IMGS = [
+      IMAGES.menuSandwiches,
+      IMAGES.menuNewCorner,
+      IMAGES.menuDineIn
+    ];
+
+    function openPaperMenuModal() {
+      switchPaperMenuImg(0);
+      document.getElementById('paper-menu-modal').classList.remove('hidden');
+    }
+
+    function closePaperMenuModal() {
+      document.getElementById('paper-menu-modal').classList.add('hidden');
+    }
+
+    function switchPaperMenuImg(index) {
+      document.getElementById('paper-menu-active-img').src = PAPER_MENU_IMGS[index];
+      [0, 1, 2].forEach(i => {
+        const btn = document.getElementById(`pm-tab-${i}`);
+        btn.className = i === index 
+          ? "pm-tab py-2 rounded-xl bg-brand-orange text-white shadow" 
+          : "pm-tab py-2 rounded-xl bg-white/15 text-gray-200";
+      });
+    }
+
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption;
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').classList.add('hidden');
+    }
+
+    function openGalleryModal() {
+      document.querySelector('section:nth-of-type(2)').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function openQrStandModal() {
+      document.getElementById('qr-stand-modal').classList.remove('hidden');
+    }
+
+    function closeQrStandModal() {
+      document.getElementById('qr-stand-modal').classList.add('hidden');
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.classList.toggle('dark');
+      const isDark = html.classList.contains('dark');
+      document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+    }
+  </script>
+</body>
+</html>
