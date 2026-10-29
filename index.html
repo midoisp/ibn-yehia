@@ -68,54 +68,20 @@
 </head>
 <body class="bg-[#FDF8F0] dark:bg-brand-dark text-[#241911] dark:text-[#FDF8F0] arabesque-bg min-h-screen pb-36 transition-colors duration-300 selection:bg-brand-orange selection:text-white">
 
-  <!-- 1. TOP TRIAL COUNTDOWN BAR (تم إخفاء زر التعديل تماماً) -->
-  <div id="trial-banner" class="sticky top-0 z-50 bg-gradient-to-r from-[#20140B] via-[#3A2110] to-[#20140B] text-white border-b border-brand-orange/50 shadow-xl">
-    <div class="max-w-6xl mx-auto px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
-      <div class="flex items-center gap-2">
-        <span class="relative flex h-2.5 w-2.5">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-orange"></span>
-        </span>
-        <span class="font-bold text-brand-gold">نسخة معاينة حية:</span>
-        <span class="font-extrabold text-white">مطعم ابن يحيى (Ben Yehia)</span>
-      </div>
-
-      <div class="flex items-center gap-2 sm:gap-3 mr-auto sm:mr-0">
-        <div class="flex items-center gap-1.5 bg-black/50 px-2.5 py-1 rounded-lg border border-brand-orange/40">
-          <span class="text-gray-300 text-[11px]">متبقي للمعاينة:</span>
-          <span id="trial-countdown" class="font-mono font-black text-brand-gold tracking-wider text-xs sm:text-sm">07:59:59</span>
-        </div>
-        
-        <button onclick="openPaywallModal(true)" class="bg-brand-orange hover:bg-orange-500 text-white font-black px-3 py-1 rounded-lg text-xs transition transform active:scale-95 shadow-md flex items-center gap-1">
-          <span>🔒</span>
-          <span>شاشة القفل</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2. SUB-BAR -->
+  <!-- 1. TOP BAR WITH SOCIAL LINKS (FACEBOOK, TIKTOK, MAPS) -->
   <div class="max-w-6xl mx-auto px-3 pt-3 flex flex-wrap items-center justify-between gap-2">
     <div class="flex items-center gap-2 bg-white/95 dark:bg-brand-card/95 backdrop-blur px-3 py-1.5 rounded-full border border-brand-orange/30 shadow-sm">
       <span class="h-2.5 w-2.5 rounded-full bg-green-500 animate-pulse"></span>
       <span class="text-xs font-black text-green-700 dark:text-green-400">مفتوح الآن • خدمة ٢٤ ساعة طوال الأسبوع</span>
     </div>
 
-    <div class="flex items-center gap-1.5 sm:gap-2">
+    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
       <button onclick="openPaperMenuModal()" class="flex items-center gap-1.5 bg-brand-orange/15 hover:bg-brand-orange/25 text-brand-orange dark:text-brand-gold border border-brand-orange/40 px-3 py-1.5 rounded-full text-xs font-extrabold transition">
         <span>📜</span>
-        <span>المنيو الورقي (٣ صور)</span>
+        <span>المنيو الورقي</span>
       </button>
 
-      <a href="https://www.facebook.com/ibnyahiarestaurant/?locale=ar_AR" target="_blank" class="flex items-center gap-1.5 bg-blue-600/15 hover:bg-blue-600 text-blue-500 hover:text-white border border-blue-500/30 px-3 py-1.5 rounded-full text-xs font-bold transition">
-        <span>📘</span>
-        <span>فيسبوك</span>
-      </a>
-
-      <a href="https://www.bing.com/maps/directions?v=2&pc=FACEBK&mid=8100&mkt=en-US&FORM=FBKPL1&style=r&rtp=%7Epos.31.265243530273438_32.30477523803711_15%2520Abd%2520El%2520Hady%2520Oraby%2520Street%252C%2520Port%2520Said%252C%2520Bur%2520Sa%27id_%25D9%2585%25D8%25B7%25D8%25B9%25D9%2585%2520%25D8%25A7%25D8%25A8%25D9%2586%2520%25D9%258A%25D8%25AD%25D9%258A%25D9%2589_ypid%3AYN960BC0284AF70B53&cp=31.265244%7E32.304775&lvl=16" target="_blank" class="flex items-center gap-1.5 bg-green-600/15 hover:bg-green-600 text-green-500 hover:text-white border border-green-500/30 px-3 py-1.5 rounded-full text-xs font-bold transition">
-        <span>📍</span>
-        <span>الموقع وخريطة الوصول</span>
-      </a>
+      
 
       <button onclick="openQrStandModal()" class="flex items-center gap-1.5 bg-white dark:bg-brand-card hover:border-brand-orange border border-brand-orange/25 px-3 py-1.5 rounded-full text-xs font-bold transition shadow-sm">
         <span>🖨️</span>
@@ -128,7 +94,7 @@
     </div>
   </div>
 
-  <!-- 3. HERO HEADER -->
+  <!-- 2. HERO HEADER -->
   <header class="max-w-6xl mx-auto px-3 pt-3 pb-2">
     <div class="relative rounded-3xl overflow-hidden bg-brand-card border-2 border-brand-orange/50 shadow-card">
       <div class="absolute inset-0">
@@ -137,9 +103,10 @@
       </div>
 
       <div class="relative z-10 px-4 py-6 sm:p-8 flex flex-col md:flex-row items-center gap-5 text-center md:text-right">
-        <div class="relative group shrink-0">
+        <!-- Brand Logo (Secret Admin Trigger enabled here too) -->
+        <div onclick="handleSecretLogoClick()" class="relative group shrink-0 cursor-pointer select-none" title="مطعم ابن يحيى">
           <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-orange via-brand-gold to-brand-orange rounded-full blur opacity-75 group-hover:opacity-100 transition"></div>
-          <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-b from-brand-gold to-brand-orange shadow-2xl logo-float">
+          <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-b from-brand-gold to-brand-orange shadow-2xl logo-float active:scale-95 transition">
             <img src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="لوجو مطعم ابن يحيى" class="w-full h-full object-cover rounded-full bg-white" />
           </div>
           <span class="absolute -bottom-1 right-1 bg-brand-orange text-white text-[11px] font-black px-2.5 py-0.5 rounded-full shadow border border-white/40">
@@ -159,6 +126,7 @@
             أقوى تشكيلة ساندوتشات واختراعات ركن الجديد، فلافل محشية، طواجن الفول، ووجبات الصالة والفطير الفلاحي الساخن على مدار ٢٤ ساعة.
           </p>
 
+          <!-- أزرار التواصل والسوشيال ميديا والموقع في واجهة الصفحة الرئيسية -->
           <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs">
             <a href="tel:01212845466" class="flex items-center gap-1.5 bg-brand-orange hover:bg-orange-600 text-white px-3.5 py-2 rounded-xl font-black shadow transition">
               <span>📞</span>
@@ -167,6 +135,18 @@
             <a href="tel:01029428866" class="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 backdrop-blur text-white px-3.5 py-2 rounded-xl font-black border border-white/25 transition">
               <span>📲</span>
               <span>دليفري 2: 01029428866</span>
+            </a>
+            <a href="https://www.facebook.com/ibnyahiarestaurant/?locale=ar_AR" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 bg-blue-600/80 hover:bg-blue-600 text-white px-3 py-2 rounded-xl font-black border border-blue-400/30 transition shadow">
+              <span>📘</span>
+              <span>فيسبوك</span>
+            </a>
+            <a href="https://www.tiktok.com/@ebn.yahia3?_t=ZS-8xFfJ8HK2M9&_r=1" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 bg-black/80 hover:bg-black text-white px-3 py-2 rounded-xl font-black border border-pink-500/50 transition shadow">
+              <span>🎵</span>
+              <span>تيك توك</span>
+            </a>
+            <a href="https://www.bing.com/maps/directions?v=2&pc=FACEBK&mid=8100&mkt=en-US&FORM=FBKPL1&style=r&rtp=%7Epos.31.265243530273438_32.30477523803711_15%2520Abd%2520El%2520Hady%2520Oraby%2520Street%252C%2520Port%2520Said%252C%2520Bur%2520Sa%27id_%25D9%2585%25D8%25B7%25D8%25B9%25D9%2585%2520%25D8%25A7%25D8%25A8%25D9%2586%2520%25D9%258A%25D8%25AD%25D9%258A%25D9%2589_ypid%3AYN960BC0284AF70B53&cp=31.265244%7E32.304775&lvl=16" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 bg-green-600/80 hover:bg-green-600 text-white px-3 py-2 rounded-xl font-black border border-green-400/30 transition shadow">
+              <span>📍</span>
+              <span>موقع المطعم</span>
             </a>
           </div>
         </div>
@@ -195,7 +175,12 @@
               <option value="3">طاولة 3</option>
               <option value="4" selected>طاولة 4</option>
               <option value="5">طاولة 5</option>
-              <option value="عائلي VIP">عائلات</option>
+              <option value="6">طاولة 6</option>
+              <option value="7">طاولة 7</option>
+              <option value="8">طاولة 8</option>
+              <option value="9">طاولة 9</option>
+              <option value="10">طاولة 10</option>
+              <option value="عائلي VIP">ركن العائلات</option>
             </select>
           </div>
         </div>
@@ -203,7 +188,7 @@
     </div>
   </header>
 
-  <!-- 4. FEATURED POSTERS SLIDER -->
+  <!-- 3. FEATURED POSTERS SLIDER -->
   <section class="max-w-6xl mx-auto px-3 py-3">
     <div class="flex items-center justify-between mb-2.5">
       <div class="flex items-center gap-2">
@@ -215,7 +200,7 @@
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
       <div onclick="openCustomizeModal(205)" class="group cursor-pointer relative rounded-xl overflow-hidden border border-brand-orange/40 shadow aspect-[4/5] bg-brand-card">
-        <img src="741556225_1373944754674761_1894538959646502705_n.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <img src="741556225_1373944754674761_1894538959646502705_n.jpg" alt="طعمية بسطرمة" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-2.5">
           <h3 class="text-white font-black text-xs">طعمية بسطرمة</h3>
           <span class="text-brand-gold font-black text-xs">14 ج.م</span>
@@ -223,7 +208,7 @@
       </div>
 
       <div onclick="openCustomizeModal(959)" class="group cursor-pointer relative rounded-xl overflow-hidden border border-brand-orange/40 shadow aspect-[4/5] bg-brand-card">
-        <img src="738877843_1028836019636008_9026444059321761422_n.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <img src="738877843_1028836019636008_9026444059321761422_n.jpg" alt="شكشوكة بالسجق" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-2.5">
           <h3 class="text-white font-black text-xs">شكشوكة بالسجق</h3>
           <span class="text-brand-gold font-black text-xs">30 ج.م</span>
@@ -231,7 +216,7 @@
       </div>
 
       <div onclick="openCustomizeModal(802)" class="group cursor-pointer relative rounded-xl overflow-hidden border border-brand-orange/40 shadow aspect-[4/5] bg-brand-card">
-        <img src="742345729_907729382369500_5987087870212143893_n.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <img src="742345729_907729382369500_5987087870212143893_n.jpg" alt="بطاطس جمبري" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-2.5">
           <h3 class="text-white font-black text-xs">بطاطس جمبري</h3>
           <span class="text-brand-gold font-black text-xs">20 ج.م</span>
@@ -239,7 +224,7 @@
       </div>
 
       <div onclick="openCustomizeModal(1)" class="group cursor-pointer relative rounded-xl overflow-hidden border border-brand-orange/40 shadow aspect-[4/5] bg-brand-card">
-        <img src="732045901_991772973711400_4277556110004826114_n.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <img src="732045901_991772973711400_4277556110004826114_n.jpg" alt="أباتشي ابن يحيى" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-2.5">
           <h3 class="text-white font-black text-xs">أباتشي ابن يحيى</h3>
           <span class="text-brand-gold font-black text-xs">22 ج.م</span>
@@ -247,7 +232,7 @@
       </div>
 
       <div onclick="openCustomizeModal(913)" class="group cursor-pointer relative rounded-xl overflow-hidden border border-brand-orange/40 shadow aspect-[4/5] bg-brand-card col-span-2 sm:col-span-1">
-        <img src="736701109_1034935849006158_2198613648915311498_n.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <img src="736701109_1034935849006158_2198613648915311498_n.jpg" alt="طبق فول المخصوص" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-2.5">
           <h3 class="text-white font-black text-xs">طبق فول المخصوص</h3>
           <span class="text-brand-gold font-black text-xs">25 ج.م</span>
@@ -256,8 +241,8 @@
     </div>
   </section>
 
-  <!-- 5. MENU TYPE SWITCHER & SEARCH + CATEGORIES -->
-  <nav aria-label="أقسام المنيو" class="sticky top-[43px] z-40 bg-[#FDF8F0]/95 dark:bg-brand-dark/95 backdrop-blur-md border-y border-brand-orange/25 py-2 shadow">
+  <!-- 4. MENU TYPE SWITCHER & SEARCH + CATEGORIES -->
+  <nav aria-label="أقسام المنيو" class="sticky top-0 z-40 bg-[#FDF8F0]/95 dark:bg-brand-dark/95 backdrop-blur-md border-y border-brand-orange/25 py-2 shadow">
     <div class="max-w-6xl mx-auto px-3 space-y-2">
       <div class="flex flex-col sm:flex-row gap-2 items-center justify-between">
         <div class="grid grid-cols-3 w-full sm:w-auto bg-white dark:bg-brand-card p-1 rounded-xl border border-brand-orange/30 text-[11px] font-extrabold">
@@ -289,7 +274,7 @@
     </div>
   </nav>
 
-  <!-- 6. COMPACT MENU ITEMS GRID -->
+  <!-- 5. COMPACT MENU ITEMS GRID -->
   <main class="max-w-6xl mx-auto px-3 py-4">
     <div id="menu-sections-wrapper" class="space-y-6"></div>
 
@@ -300,7 +285,7 @@
     </div>
   </main>
 
-  <!-- 7. GALLERY -->
+  <!-- 6. GALLERY -->
   <section class="max-w-6xl mx-auto px-3 py-4">
     <div class="bg-white dark:bg-brand-card rounded-2xl p-3 sm:p-5 border border-brand-orange/30 shadow-sm">
       <div class="flex items-center justify-between mb-3">
@@ -312,36 +297,43 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
         <div onclick="openLightbox('707338765_1560224036113745_3563887800171160082_n.jpg', 'فريق العمل')" class="cursor-pointer rounded-xl overflow-hidden h-36 border border-brand-orange/30 relative group">
-          <img src="707338765_1560224036113745_3563887800171160082_n.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" />
+          <img src="707338765_1560224036113745_3563887800171160082_n.jpg" alt="فريق العمل" class="w-full h-full object-cover group-hover:scale-105 transition" />
           <span class="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded">فريق العمل</span>
         </div>
         <div onclick="openLightbox('749207829_992080856986691_1301121746694385_n.jpg', 'صالة العائلات')" class="cursor-pointer rounded-xl overflow-hidden h-36 border border-brand-orange/30 relative group">
-          <img src="749207829_992080856986691_1301121746694385_n.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" />
+          <img src="749207829_992080856986691_1301121746694385_n.jpg" alt="صالة العائلات" class="w-full h-full object-cover group-hover:scale-105 transition" />
           <span class="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded">صالة العائلات</span>
         </div>
         <div onclick="openLightbox('748963388_874740051948928_7058704949866629732_n.jpg', 'الواجهة')" class="cursor-pointer rounded-xl overflow-hidden h-36 border border-brand-orange/30 relative group">
-          <img src="748963388_874740051948928_7058704949866629732_n.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" />
+          <img src="748963388_874740051948928_7058704949866629732_n.jpg" alt="الواجهة" class="w-full h-full object-cover group-hover:scale-105 transition" />
           <span class="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded">الواجهة</span>
         </div>
         <div onclick="openLightbox('651348160_1492390719563744_7191028929325187550_n.jpg', 'السفرة')" class="cursor-pointer rounded-xl overflow-hidden h-36 border border-brand-orange/30 relative group">
-          <img src="651348160_1492390719563744_7191028929325187550_n.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" />
+          <img src="651348160_1492390719563744_7191028929325187550_n.jpg" alt="السفرة" class="w-full h-full object-cover group-hover:scale-105 transition" />
           <span class="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded">السفرة</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 8. FOOTER (Triple click logo to open Admin securely) + Version 1 -->
+  <!-- 7. FOOTER (Triple click logo to open Admin securely) + Version 1 -->
   <footer class="max-w-6xl mx-auto px-3 pt-4 pb-12 border-t border-brand-orange/25 text-center text-xs text-gray-600 dark:text-gray-400">
     <div class="flex flex-col items-center gap-2">
-      <img onclick="handleSecretLogoClick()" src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="ابن يحيى" title="" class="cursor-pointer w-14 h-14 rounded-full border-2 border-brand-orange shadow-md active:scale-90 transition" />
+      <img onclick="handleSecretLogoClick()" src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="ابن يحيى" class="cursor-pointer select-none w-14 h-14 rounded-full border-2 border-brand-orange shadow-md active:scale-90 transition" />
       <p class="font-black text-sm text-[#241911] dark:text-white">مطعم ابن يحيى - فول وفلافل (الطعم الأصلي اللي تحبه)</p>
       <p class="font-bold text-brand-orange">خدمة التوصيل ٢٤ ساعة: 01212845466 - 01029428866</p>
+      <div class="flex items-center justify-center gap-3 my-1">
+        <a href="https://www.facebook.com/ibnyahiarestaurant/?locale=ar_AR" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline font-bold">فيسبوك</a>
+        <span>•</span>
+        <a href="https://www.tiktok.com/@ebn.yahia3?_t=ZS-8xFfJ8HK2M9&_r=1" target="_blank" rel="noopener noreferrer" class="text-pink-500 hover:underline font-bold">تيك توك</a>
+        <span>•</span>
+        <a href="https://www.bing.com/maps/directions?v=2&pc=FACEBK&mid=8100&mkt=en-US&FORM=FBKPL1&style=r&rtp=%7Epos.31.265243530273438_32.30477523803711_15%2520Abd%2520El%2520Hady%2520Oraby%2520Street%252C%2520Port%2520Said%252C%2520Bur%2520Sa%27id_%25D9%2585%25D8%25B7%25D8%25B9%25D9%2585%2520%25D8%25A7%25D8%25A8%25D9%2586%2520%25D9%258A%25D8%25AD%25D9%258A%25D9%2589_ypid%3AYN960BC0284AF70B53&cp=31.265244%7E32.304775&lvl=16" target="_blank" rel="noopener noreferrer" class="text-green-500 hover:underline font-bold">موقع المطعم</a>
+      </div>
       <p class="text-[11px] text-gray-500">الإصدار رقم 1 (v1.0) • تم التطوير بواسطة <span class="text-brand-orange font-bold">Scenario Tech</span></p>
     </div>
   </footer>
 
-  <!-- 9. FLOATING BOTTOM CART BAR -->
+  <!-- 8. FLOATING BOTTOM CART BAR -->
   <div class="fixed bottom-3 inset-x-0 z-40 px-3 pointer-events-none">
     <div class="max-w-3xl mx-auto pointer-events-auto">
       <div onclick="openCartModal()" role="button" class="cursor-pointer bg-gradient-to-r from-[#241409] via-[#381F0E] to-[#241409] text-white p-2.5 sm:px-4 rounded-2xl border-2 border-brand-orange shadow-glow flex items-center justify-between gap-3 transition transform active:scale-98 pulse-orange">
@@ -364,6 +356,20 @@
           </div>
           <span class="bg-brand-orange text-white w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs">←</span>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECRET ADMIN PASSWORD MODAL (Masked Input - No Exposed Password) -->
+  <div id="admin-auth-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-[#0A0E17] text-white w-full max-w-xs rounded-3xl border-2 border-[#00E5FF] p-5 text-center shadow-2xl">
+      <div class="text-3xl mb-2">🔐</div>
+      <h3 class="font-black text-sm text-[#00E5FF] mb-1">دخول لوحة التحكم</h3>
+      <p class="text-[11px] text-gray-400 mb-3">أدخل الرمز السري الخاص بالإدارة</p>
+      <input type="password" id="admin-pass-input" onkeydown="if(event.key==='Enter') verifyAdminPassword()" placeholder="••••••••••" class="w-full p-2.5 rounded-xl bg-black border border-white/20 text-center text-white font-black tracking-widest mb-3 focus:outline-none focus:border-[#00E5FF]" />
+      <div class="flex gap-2">
+        <button onclick="closeAdminAuthModal()" class="flex-1 bg-white/10 hover:bg-white/20 text-white font-bold py-2 rounded-xl text-xs">إلغاء</button>
+        <button onclick="verifyAdminPassword()" class="flex-1 bg-[#00E5FF] hover:bg-cyan-400 text-[#0A0E17] font-black py-2 rounded-xl text-xs shadow">دخول</button>
       </div>
     </div>
   </div>
@@ -394,7 +400,7 @@
 
       <div class="p-3.5 overflow-y-auto space-y-3 text-xs flex-1">
         <div class="flex items-center gap-3 bg-white/5 p-2.5 rounded-xl border border-white/10">
-          <img id="admin-preview-img" src="" class="w-20 h-20 rounded-lg object-cover border border-[#FF6B00] shrink-0" />
+          <img id="admin-preview-img" src="" alt="معاينة" class="w-20 h-20 rounded-lg object-cover border border-[#FF6B00] shrink-0" />
           <div class="flex-1 space-y-1.5">
             <label class="block font-bold text-[#00E5FF]">اختر صورة جديدة:</label>
             <label class="cursor-pointer bg-[#FF6B00] text-white font-black py-2 px-3 rounded-xl inline-block text-xs">
@@ -448,7 +454,7 @@
     </div>
   </div>
 
-  <!-- 10. ITEM CUSTOMIZATION MODAL -->
+  <!-- 9. ITEM CUSTOMIZATION MODAL -->
   <div id="customize-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-[#FDF8F0] dark:bg-brand-card w-full max-w-lg rounded-t-3xl sm:rounded-3xl border-t-2 sm:border-2 border-brand-orange/50 overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
       <div class="relative h-44 bg-brand-dark shrink-0">
@@ -542,12 +548,12 @@
     </div>
   </div>
 
-  <!-- 11. CART MODAL -->
+  <!-- 10. CART MODAL -->
   <div id="cart-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-[#FDF8F0] dark:bg-brand-card w-full max-w-lg rounded-t-3xl sm:rounded-3xl border-t-2 sm:border-2 border-brand-orange overflow-hidden shadow-2xl max-h-[92vh] flex flex-col">
       <div class="p-3.5 bg-gradient-to-r from-[#241409] to-[#381F0E] text-white flex items-center justify-between border-b border-brand-orange/40">
         <div class="flex items-center gap-2">
-          <img src="637885230_1469628955173254_3604443719754401676_n.jpg" class="w-8 h-8 rounded-full border border-brand-gold" />
+          <img src="637885230_1469628955173254_3604443719754401676_n.jpg" alt="ابن يحيى" class="w-8 h-8 rounded-full border border-brand-gold" />
           <h3 class="font-black text-sm">قائمة طلباتي</h3>
         </div>
         <button onclick="closeCartModal()" class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center font-black text-xs">✕</button>
@@ -592,7 +598,7 @@
     </div>
   </div>
 
-  <!-- 12. WAITER SCREEN -->
+  <!-- 11. WAITER SCREEN -->
   <div id="waiter-modal" class="fixed inset-0 z-50 hidden bg-brand-dark text-white flex flex-col justify-between p-4 overflow-y-auto">
     <div class="flex items-center justify-between border-b border-brand-orange/40 pb-3">
       <h3 id="waiter-table-title" class="text-xl font-black text-brand-gold">طاولة رقم 4</h3>
@@ -605,36 +611,36 @@
     </div>
   </div>
 
-  <!-- 13. PAPER MENU MODAL -->
+  <!-- 12. PAPER MENU MODAL -->
   <div id="paper-menu-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex flex-col p-3">
     <div class="max-w-4xl w-full mx-auto flex items-center justify-between text-white mb-2">
       <h3 class="font-black text-sm text-brand-gold">📜 صور المنيو الورقي</h3>
       <button onclick="closePaperMenuModal()" class="bg-white/15 w-8 h-8 rounded-full font-black">✕</button>
     </div>
     <div class="max-w-xs mx-auto grid grid-cols-3 gap-1 mb-2 w-full text-[11px] font-black">
-      <button onclick="switchPaperMenuImg(0)" id="pm-tab-0" class="pm-tab py-1.5 rounded bg-brand-orange text-white">1</button>
-      <button onclick="switchPaperMenuImg(1)" id="pm-tab-1" class="pm-tab py-1.5 rounded bg-white/15 text-gray-200">2</button>
-      <button onclick="switchPaperMenuImg(2)" id="pm-tab-2" class="pm-tab py-1.5 rounded bg-white/15 text-gray-200">3</button>
+      <button onclick="switchPaperMenuImg(0)" id="pm-tab-0" class="pm-tab py-1.5 rounded bg-brand-orange text-white">1. الساندوتشات</button>
+      <button onclick="switchPaperMenuImg(1)" id="pm-tab-1" class="pm-tab py-1.5 rounded bg-white/15 text-gray-200">2. الجديد</button>
+      <button onclick="switchPaperMenuImg(2)" id="pm-tab-2" class="pm-tab py-1.5 rounded bg-white/15 text-gray-200">3. الصالة</button>
     </div>
     <div class="flex-1 overflow-auto flex items-start justify-center">
-      <img id="paper-menu-active-img" src="747839747_1053794104015841_5161540353005909911_n.jpg" class="max-w-full md:max-w-lg rounded-xl border border-brand-orange shadow" />
+      <img id="paper-menu-active-img" src="747839747_1053794104015841_5161540353005909911_n.jpg" alt="منيو ابن يحيى الورقي" class="max-w-full md:max-w-lg rounded-xl border border-brand-orange shadow" />
     </div>
   </div>
 
-  <!-- 14. LIGHTBOX -->
+  <!-- 13. LIGHTBOX -->
   <div id="lightbox-modal" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-black/90 flex flex-col items-center justify-center p-3">
-    <img id="lightbox-img" src="" class="max-h-[75vh] max-w-full rounded-xl border border-brand-orange object-contain" />
+    <img id="lightbox-img" src="" alt="" class="max-h-[75vh] max-w-full rounded-xl border border-brand-orange object-contain" />
     <p id="lightbox-caption" class="text-white font-bold text-xs mt-2 bg-black/60 px-3 py-1 rounded-full"></p>
   </div>
 
-  <!-- 15. QR STAND MODAL -->
+  <!-- 14. QR STAND MODAL -->
   <div id="qr-stand-modal" class="fixed inset-0 z-50 hidden bg-black/85 flex items-center justify-center p-3 overflow-y-auto">
     <div class="max-w-xs w-full space-y-2">
       <div id="qr-stand-printable" class="bg-gradient-to-b from-[#241409] to-[#18110C] text-white p-4 rounded-2xl border-2 border-brand-orange text-center shadow-xl">
         <h3 class="text-lg font-black text-brand-gold">مطعم ابن يحيى</h3>
         <p class="text-[10px] text-gray-300 mb-2">امسح الكود لتطلب من طاولتك</p>
-        <div class="bg-white p-2.5 rounded-xl w-36 h-36 mx-auto flex items-center justify-center shadow">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://midoisp.github.io/ibn-yehia/" class="w-full h-full object-contain" />
+        <div class="bg-white p-2.5 rounded-xl w-40 h-40 mx-auto flex items-center justify-center shadow">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://midoisp.github.io/ibn-yehia-/" alt="QR Code" class="w-full h-full object-contain" />
         </div>
       </div>
       <div class="flex gap-2">
@@ -644,45 +650,6 @@
     </div>
   </div>
 
-  <!-- 16. PAYWALL OVERLAY (السعر 1500 جنيه) -->
-  <div id="paywall-overlay" class="fixed inset-0 z-50 hidden bg-[#120B07]/95 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
-    <div class="max-w-lg w-full bg-gradient-to-b from-[#241911] to-[#18110C] text-white rounded-3xl border-2 border-brand-orange shadow-glow p-6 text-center my-auto relative">
-      <button id="close-paywall-preview-btn" onclick="closePaywallModal()" class="absolute top-3 left-3 text-xs bg-white/10 text-gray-300 px-3 py-1 rounded-full font-bold">✕</button>
-
-      <div class="w-16 h-16 mx-auto rounded-full p-1 bg-gradient-to-r from-brand-orange to-brand-gold shadow-lg mb-2">
-        <img src="637885230_1469628955173254_3604443719754401676_n.jpg" class="w-full h-full rounded-full object-cover" />
-      </div>
-
-      <span class="inline-block bg-red-600/20 text-red-400 border border-red-500/40 text-[11px] font-black px-3 py-0.5 rounded-full mb-1">
-        🔒 انتهت فترة المعاينة التجريبية
-      </span>
-
-      <h2 class="text-xl sm:text-2xl font-black text-white mb-1">تفعيل المنيو التفاعلي الدائم</h2>
-      <h3 class="text-base font-extrabold text-brand-gold mb-3">مطعم ابن يحيى (Ben Yehia)</h3>
-
-      <div class="bg-black/45 rounded-2xl p-3.5 border border-brand-orange/50 text-right mb-4">
-        <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
-          <span class="bg-brand-orange text-white text-[11px] font-black px-2 py-0.5 rounded">عرض خاص</span>
-          <div class="text-left">
-            <span class="text-xl font-black text-brand-gold">١,٥٠٠ ج.م</span>
-            <span class="block text-[9px] text-gray-400">اشتراك سنوى  </span>
-          </div>
-        </div>
-        <ul class="space-y-1.5 text-xs font-bold text-gray-200">
-          <li>✅ منيو تفاعلي كامل باسم مكانك يفتح في أقل من ثانية</li>
-          <li>✅ كود QR دائم ومربوط بطاولات المكان مدى الحياة</li>
-          <li>✅ جاني مدى الحياة</li>
-        </ul>
-      </div>
-
-      <a href="https://wa.me/201005025722?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20Scenario%20Tech%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AA%D9%81%D8%B9%D9%8A%D9%84%20%D9%85%D9%86%D9%8A%D9%85%20%D9%85%D8%B7%D8%B9%D9%85%20%D8%A7%D8%A8%D9%86%20%D9%8A%D8%AD%D9%8A%D9%89" target="_blank" class="w-full bg-green-600 hover:bg-green-500 text-white font-black py-3 px-4 rounded-xl shadow flex items-center justify-center gap-2 text-sm transition">
-        <span>💬</span>
-        <span>تفعيل المنيو الآن عبر واتساب</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- SCRIPT ENGINE -->
   <script>
     const IMAGES = {
       logo: "637885230_1469628955173254_3604443719754401676_n.jpg",
@@ -895,7 +862,6 @@
     let secretClickTimer = null;
 
     window.addEventListener('DOMContentLoaded', () => {
-      initTrialTimer();
       renderCategories();
       renderMenu();
       updateCartUI();
@@ -909,14 +875,25 @@
       secretClickTimer = setTimeout(() => { secretClickCount = 0; }, 1200);
       if (secretClickCount >= 3) {
         secretClickCount = 0;
-        const pass = prompt("🔐 أدخل كود الإدارة:");
-        if (pass === "01005025722") {
-          isAdminMode = true;
-          document.getElementById('admin-floating-bar').classList.remove('hidden');
-          renderMenu();
-        } else if (pass !== null) {
-          alert("❌ كود غير صحيح!");
-        }
+        document.getElementById('admin-pass-input').value = '';
+        document.getElementById('admin-auth-modal').classList.remove('hidden');
+        setTimeout(() => document.getElementById('admin-pass-input').focus(), 100);
+      }
+    }
+
+    function closeAdminAuthModal() {
+      document.getElementById('admin-auth-modal').classList.add('hidden');
+    }
+
+    function verifyAdminPassword() {
+      const pass = document.getElementById('admin-pass-input').value.trim();
+      if (pass === "01005025722") {
+        closeAdminAuthModal();
+        isAdminMode = true;
+        document.getElementById('admin-floating-bar').classList.remove('hidden');
+        renderMenu();
+      } else {
+        alert("❌ كود غير صحيح!");
       }
     }
 
@@ -1033,30 +1010,6 @@
       alert("✅ تم تصدير ملف index.html المحدث بنجاح!");
     }
 
-    const TRIAL_DURATION_MS = 8 * 60 * 60 * 1000;
-    function initTrialTimer() {
-      let start = localStorage.getItem('ibn_yehia_trial_start');
-      if (!start) { start = Date.now().toString(); localStorage.setItem('ibn_yehia_trial_start', start); }
-      const endTime = parseInt(start, 10) + TRIAL_DURATION_MS;
-      setInterval(() => {
-        const diff = endTime - Date.now();
-        const el = document.getElementById('trial-countdown');
-        if (diff <= 0) { el.textContent = "00:00:00"; openPaywallModal(false); }
-        else {
-          const hrs = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
-          const mins = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-          const secs = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
-          el.textContent = `${hrs}:${mins}:${secs}`;
-        }
-      }, 1000);
-    }
-
-    function openPaywallModal(isPreview = true) {
-      document.getElementById('close-paywall-preview-btn').style.display = isPreview ? 'block' : 'none';
-      document.getElementById('paywall-overlay').classList.remove('hidden');
-    }
-    function closePaywallModal() { document.getElementById('paywall-overlay').classList.add('hidden'); }
-
     function renderCategories() {
       const container = document.getElementById('categories-container');
       const filtered = CATEGORIES.filter(c => c.id === 'all' || activeSectionFilter === 'all' || c.section === activeSectionFilter);
@@ -1115,7 +1068,7 @@
           ${adminEdit}
           ${item.badge ? `<span class="absolute top-2 right-2 z-10 bg-brand-orange text-white text-[9px] font-black px-1.5 py-0.2 rounded-full">${item.badge}</span>` : ''}
           <div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-black/20 border border-brand-orange/20">
-            <img src="${item.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+            <img src="${item.img}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
           </div>
           <div class="flex-1 min-w-0">
             <h3 class="font-black text-xs sm:text-sm text-[#241911] dark:text-white truncate">${item.name}</h3>
@@ -1233,8 +1186,12 @@
     function sendOrderToRestaurantWhatsApp() {
       if (cart.length === 0) { alert('اختر أصنافاً أولاً.'); return; }
       const total = cart.reduce((s, i) => s + (i.unitPrice * i.qty), 0);
-      let info = orderMode === 'dinein' ? `🍽️ صالة (${document.getElementById('order-table-input').value})` : orderMode === 'takeaway' ? `🛍️ تيك أواي\n👤 ${document.getElementById('takeaway-name').value}` : `🛵 دليفري\n👤 ${document.getElementById('delivery-name').value}\n📍 ${document.getElementById('delivery-address').value}`;
-      const items = cart.map((i, idx) => `${idx + 1}. ${i.qty} × ${i.name} (${i.unitPrice * i.qty} ج.م)`).join('\n');
+      let info = orderMode === 'dinein' 
+        ? `🍽️ صالة (${document.getElementById('order-table-input').value})` 
+        : orderMode === 'takeaway' 
+          ? `🛍️ تيك أواي\n👤 ${document.getElementById('takeaway-name').value || 'عميل'}\n📱 ${document.getElementById('takeaway-phone').value || ''}` 
+          : `🛵 دليفري\n👤 ${document.getElementById('delivery-name').value || 'عميل'}\n📱 ${document.getElementById('delivery-phone').value || ''}\n📍 ${document.getElementById('delivery-address').value || ''}`;
+      const items = cart.map((i, idx) => `${idx + 1}. ${i.qty} × ${i.name} (${i.unitPrice * i.qty} ج.م)\n   _التفاصيل: ${i.details}_`).join('\n');
       window.open(`https://wa.me/201212845466?text=${encodeURIComponent(`*مطعم ابن يحيى* 🥙\n${info}\n---\n${items}\n---\n💰 الإجمالي: ${total} ج.م`)}`, '_blank');
     }
 
